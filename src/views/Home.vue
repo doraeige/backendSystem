@@ -1,6 +1,5 @@
 <template>
-  <div class="home">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+  <div class="homeHeader">
     <el-container>
         <el-header>
             <el-menu
@@ -8,8 +7,8 @@
                 mode="horizontal"
                 @select="handleSelect"
                 background-color="#5BC0BF"
-                text-color="#fff"
-                active-text-color="#fff">
+                text-color="rgba(255,255,255,0.8)"
+                active-text-color="rgba(255,255,255,0.9)">
                 <el-menu-item index="0" disabled>LOGO</el-menu-item>
                 <el-menu-item index="1">首页</el-menu-item>
                 <el-menu-item index="2">商品</el-menu-item>
@@ -33,7 +32,7 @@
                     <el-badge :value="notice" class="icon-notice">
                         <i class="el-input__icon el-icon-bell" v-popover:popover></i>
                     </el-badge>
-                    <el-popover
+                    <!-- <el-popover
                         ref="popover"
                         placement="bottom"
                         width="277"
@@ -46,7 +45,7 @@
                                 <li class="li-right">({{item.num}})</li>
                             </ul>
                         </div>
-                        </el-popover>
+                        </el-popover> -->
                 </el-menu-item>
                 <el-menu-item index="15">
                     <i class="iconfont icon-guanji"></i>
@@ -54,9 +53,14 @@
             </el-menu>
         </el-header>
       <el-container>
-        <el-aside width="260px">  
+        <el-aside width="188px"> 
+            <HomeSideBar v-show="activeIndex == 1">
+            </HomeSideBar>
+            <ShopSideBar v-show="activeIndex == 2"></ShopSideBar>
         </el-aside>
-        <el-main>Main</el-main>
+        <el-main>
+            <systemIndex v-show="activeIndex == 1"></systemIndex>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -64,11 +68,18 @@
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import HomeSideBar from '@/components/Home/HomeSideBar.vue'
+import systemIndex from '@/components/Home/HomeRightSide/systemIndex.vue'
+import ShopSideBar from '@/components/Shop/ShopSideBar.vue'
 
 export default {
-   name: "home",
-   data () {
+    name: "homeHeader",
+    // components: {
+    //    HomeSideBar,
+    //    ShopSideBar,
+    //    systemIndex
+    // },
+    data () {
         return {
             activeIndex: '1',
             notice: 20,
@@ -79,22 +90,25 @@ export default {
                 {order :'已完成订单', num: 10}
             ]
         }
-   },
-    methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
     }
+    // methods: {
+    //   handleSelect(index,path) {
+    //     console.log(index,path)
+    //     this.activeIndex = index
+    //   },
+    // }
 }
 </script>
 
 <style <style lang="less" scoped>
+    @color: #fff;
+    @font-family: MicrosoftYaHei;
     .home /deep/ .el-header {
         padding: 0;
     }
     .home /deep/ .el-menu-item.is-active {
         border: 0;
-        // background-color: rgba(255,255,255,0.2) !important;
+        background-color: rgba(255,255,255,0.4) !important;
     }
     .home /deep/ .el-badge__content {
         width: 15px;
@@ -114,14 +128,13 @@ export default {
         height: 100vh;
         .el-header{
             width: 100%;
-            background-color: #5BC0BF;
-            color: rgba(255,255,255,1);
+            color: @color;
             .el-menu--horizontal>.el-menu-item {
                 border-bottom: 0;
                 box-sizing: border-box;
                 position: relative;
                 .icon-yonghu, .icon-shouye, .el-icon-bell, .icon-guanji{
-                    color: #fff;
+                    color: @color;
                     font-size: 22px;
                 }
                 .el-input__icon {
@@ -136,7 +149,7 @@ export default {
                     width: 2px;
                     content: '|';
                     height: 20px;
-                    color: rgba(255,255,255,1);
+                    color: @color;
                 }
             }
             .el-menu.el-menu--horizontal {
@@ -145,25 +158,24 @@ export default {
             .el-menu-item.is-disabled {
                 opacity: 1;
                 font-size: 30px;
-                font-family: MicrosoftYaHei;
+                font-family: @font-family;
                 cursor: default;
                 margin-left: 60px;
             }
         }
         .el-aside {
-            width: 260px;
-            height: 299px;
+            font-family: @font-family;
+            height: 100vh;
             background-color: rgba(239,239,239,1);
             color: rgba(89,87,87,1);
-            text-align: center;
-            line-height: 299px;
+            // text-align: center;
+            border: 1px solid #ebeef5;
         }
     
         .el-main {
-            background-color: #fff;
-            // color: #333;
-            text-align: center;
-            line-height: 160px;
+            background-color: @color;
+            font-family: @font-family;
+            padding: 0;
         }
     }
 </style>

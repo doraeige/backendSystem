@@ -9,14 +9,17 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/Login',
+      path: '/',
       name: 'Login',
       component: Login
     },
     {
-      path: '/',
+      path: '/Home',
       name: 'Home',
       component: () => import('./views/Home.vue')
+      // children: [
+      //   {path: '/'}
+      // ]
     }
   ]
 })
