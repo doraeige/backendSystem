@@ -1,5 +1,5 @@
 <template>
-  <div class="homeHeader">
+  <div class="home">
     <el-container>
         <el-header>
             <el-menu
@@ -53,13 +53,13 @@
             </el-menu>
         </el-header>
       <el-container>
-        <el-aside width="188px"> 
+        <el-aside width="188px">
             <HomeSideBar v-show="activeIndex == 1">
             </HomeSideBar>
             <ShopSideBar v-show="activeIndex == 2"></ShopSideBar>
         </el-aside>
         <el-main>
-            <systemIndex v-show="activeIndex == 1"></systemIndex>
+            <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -69,19 +69,18 @@
 <script>
 // @ is an alias to /src
 import HomeSideBar from '@/components/Home/HomeSideBar.vue'
-import systemIndex from '@/components/Home/HomeRightSide/systemIndex.vue'
 import ShopSideBar from '@/components/Shop/ShopSideBar.vue'
 
 export default {
-    name: "homeHeader",
-    // components: {
-    //    HomeSideBar,
-    //    ShopSideBar,
-    //    systemIndex
-    // },
+    name: "home",
+    components: {
+       HomeSideBar,
+       ShopSideBar
+    },
     data () {
         return {
             activeIndex: '1',
+            index: '',
             notice: 20,
             list: [
                 {order :'待付款订单', num: 10},
@@ -90,13 +89,13 @@ export default {
                 {order :'已完成订单', num: 10}
             ]
         }
+    },
+    methods: {
+        handleSelect(index,path) {
+            console.log(index,path)
+            this.activeIndex = index
+        },
     }
-    // methods: {
-    //   handleSelect(index,path) {
-    //     console.log(index,path)
-    //     this.activeIndex = index
-    //   },
-    // }
 }
 </script>
 

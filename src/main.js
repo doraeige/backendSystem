@@ -7,9 +7,11 @@ import './assets/reset.css'
 import './assets/icon/iconfont.css'
 import './plugins/element.js'
 import axios from 'axios'
+import echarts from 'echarts'
 
 Vue.config.productionTip = false
 Vue.prototype.axios = axios
+Vue.prototype.$echarts = echarts
 
 new Vue({
   router,

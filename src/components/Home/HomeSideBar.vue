@@ -1,15 +1,15 @@
 <template>
   <div class="homeSideBar">
     <el-col :span="24">
-        <el-menu :default-active="activeIndex"  text-color="#595757" background-color="rgba(239,239,239,1)">
+        <el-menu default-active="/systemIndex"  text-color="#595757" background-color="rgba(239,239,239,1)" :router="true">
             <el-menu-item index="0" disabled>
                 <span slot="title">系统首页</span>
             </el-menu-item>
-            <div v-for="item in list" :key="item.id">
-                <el-menu-item :index="item.id" >
-                <i class="iconfont icon-dian"></i>
-                <span slot="title">{{item.title}}</span>
-            </el-menu-item>
+            <div v-for="(item, index) in list" :key="index">
+                <el-menu-item :index="item.path" >
+                    <i class="iconfont icon-dian"></i>
+                    <span slot="title">{{item.title}}</span>
+                </el-menu-item>
             </div>  
         </el-menu>
     </el-col>
@@ -21,30 +21,29 @@ export default {
     name: 'homeSideBar',
     data() {
         return {
-            activeIndex: '1',
             list: [{
-                    id: '1',
+                    path: '/systemIndex',
                     title: '系统首页'
                 },{
-                    id: '2',
+                    path: '/accountSetting',
                     title: '账户设置'
                 },{
-                    id: '3',
+                    path: '/systemInfo',
                     title: '系统信息'
                 },{
-                    id: '4',
+                    path: '/loginLog',
                     title: '登录日志'
                 }]
         }
-    }
+    },
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
     .homeSideBar {
-        .el-menu-item{
-            border-bottom: 1px solid #ebeef5;
+        .el-menu-item, .el-submenu__title{
+            height: 39px;
+            line-height: 39px;
         }
         .el-menu-item.is-disabled {
             cursor: default;
@@ -52,7 +51,6 @@ export default {
         }
         .el-menu-item.is-active { 
             color: #5BC0BF;
-            
         }
     }    
 </style>
