@@ -3,7 +3,7 @@
 import axios from 'axios'
 import qs from 'qs'
 
-axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5c1f35b095d59f6b419e0013/api'
+axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5c1f35b095d59f6b419e0013/ht'
 
 axios.interceptors.request.use(config => {
   // Do something before request is sent
