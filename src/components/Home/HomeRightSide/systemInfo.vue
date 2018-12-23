@@ -1,8 +1,6 @@
 <template>
     <div class="systemInfo">
-        <el-col :span="24">
-            <span class="title">系统信息</span>
-        </el-col>
+        <common-nav :title="title"></common-nav>
         <el-row>
             <el-col :span="12"><div class="grid-content bg-purple">系统信息</div></el-col>
             <el-table
@@ -37,10 +35,15 @@
 </template>
 
 <script>
+import CommonNav from '../../common/CommonNav.vue'
     export default {
         name: 'systemInfo',
+        components: {
+            CommonNav
+        },
         data(){
             return {
+                title: '系统信息',
                 tableData: [{   
                         row1: '服务器操作系统',
                         row2: 'Linux(114.55.34.251)',
@@ -97,29 +100,9 @@
 <style scoped lang="less">
     @import '../../../assets/common.less';
     .systemInfo /deep/ .el-table td.is-center, .el-table th.is-center {
-        background-color: rgba(239,239,239,0.6);;
+        background-color: rgba(239,239,239,0.6);
     }
     .systemInfo {
-        .flex;
-        flex-direction: column;
-        .el-col-24 {
-            height: 39px;
-            line-height: 39px;
-            background-color: #EFEFEF;
-            .title {
-                font-size: 14px;
-                font-weight: bold;
-                color: @text-color;
-                &:before {
-                    content: '||';
-                    height: 19px;
-                    background-color: @color;
-                    color: @color;
-                    margin-right: @margin-top;
-                    margin-left: @margin-top / 4;
-                }
-            }
-        }
         .el-row {
             margin-left: calc((100% - 860px) / 2);
             .el-col-12 {
@@ -134,6 +117,5 @@
                 width: 860px !important;
             }
         }
-        
     }
 </style>

@@ -1,8 +1,6 @@
 <template>
     <div class="accountSetting">
-        <el-col :span="24">
-            <span class="title">账户设置</span>
-        </el-col>
+        <common-nav :title="title"></common-nav>
         <main>
             <div class="user-info">
                 <img src="../../../assets/oval@2x.png" alt="头像">
@@ -34,8 +32,12 @@
 </template>
 
 <script>
+import CommonNav from '../../common/CommonNav.vue'
     export default {
         name: 'accountSetting',
+        components: {
+            CommonNav
+        },
         data() {
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
@@ -57,6 +59,7 @@
                 }
             }
             return {
+                title: '账户设置',
                 ruleForm: {
                     username: '',
                     email: '',
@@ -107,24 +110,6 @@
     @import '../../../assets/common.less';
     main /deep/ .el-input__inner {
         width: 244px;
-    }
-    .el-col-24 {
-        height: @account-height;
-        line-height: @account-height;
-        background-color: #EFEFEF;
-        .title {
-            font-size: 14px;
-            font-weight: bold;
-            color: @text-color;
-            &:before {
-                content: '||';
-                height: 19px;
-                background-color: @color;
-                color: @color;
-                margin-right: @margin-top;
-                margin-left: @margin-top / 4;
-            }
-        }
     }
     main {
         width: 100%;

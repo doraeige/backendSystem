@@ -167,7 +167,6 @@ export default {
             height: 100vh;
             background-color: rgba(239,239,239,1);
             color: rgba(89,87,87,1);
-            // text-align: center;
             border: 1px solid #ebeef5;
         }
     

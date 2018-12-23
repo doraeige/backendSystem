@@ -1,8 +1,6 @@
 <template>
     <div class="systemIndex">
-        <el-col :span="24">
-            <span class="title">系统首页</span>
-        </el-col>
+        <common-nav :title="title"></common-nav>
         <main>
             <el-row>
                 <el-col :span="6" v-for="(item,index) in saleList" :key="index">
@@ -141,6 +139,7 @@
 </template>
 
 <script>
+import CommonNav from '../../common/CommonNav.vue'
 // 引入 ECharts 主模块
 let echarts = require('echarts/lib/echarts')
 // 引入折线图
@@ -151,8 +150,12 @@ require('echarts/lib/component/tooltip')
 require('echarts/lib/component/title')
 export default {
     name: 'systemIndex',
+    components: {
+        CommonNav
+    },
     data(){
         return {
+            title: '系统首页',
             saleList: [
                 {icon: 'iconfont icon-dingdan', text: '今日订单总数', money: '200.00'},
                 {icon: 'iconfont icon-jinqian', text: '今日销售总额', money: '￥5600.00'},
@@ -381,24 +384,6 @@ export default {
         padding: 0 20px;
     }
     .systemIndex {
-        .el-col-24 {
-            height: 39px;
-            line-height: 39px;
-            background-color: #EFEFEF;
-            .title {
-                font-size: 14px;
-                font-weight: bold;
-                color: @text-color;
-                &:before {
-                    content: '||';
-                    height: 19px;
-                    background-color: @color;
-                    color: @color;
-                    margin-right: 20px;
-                    margin-left: 5px;
-                }
-            }
-        }
         main{
             margin-left: calc((100% - 867px) / 2);
             .el-row {

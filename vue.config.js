@@ -17,7 +17,7 @@ module.exports = {
         ws: true, // 是否跨域
         changOrigin: true,
         pathRewrite: { // 重命名路径名
-          '^/api': ''
+          '^/api': 'api'
         }
       }
     },
