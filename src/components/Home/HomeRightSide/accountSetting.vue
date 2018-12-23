@@ -67,7 +67,7 @@
                 rules: {
                     username: [
                         { required: true, message: '请输入用户名', trigger: 'blur' },
-                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                        { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
                     ],
                     email: [
                         { required: true, message: '请输入邮箱地址', trigger: 'blur' },
@@ -89,7 +89,6 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        console.log(valid)
                         alert('submit!')
                     } else {
                         console.log('error submit!!')
@@ -105,14 +104,13 @@
 </script>
 
 <style scoped lang="less">
-    @text-color: #595757;
-    @color: #5BC0BF;
+    @import '../../../assets/common.less';
     main /deep/ .el-input__inner {
         width: 244px;
     }
     .el-col-24 {
-        height: 39px;
-        line-height: 39px;
+        height: @account-height;
+        line-height: @account-height;
         background-color: #EFEFEF;
         .title {
             font-size: 14px;
@@ -123,16 +121,14 @@
                 height: 19px;
                 background-color: @color;
                 color: @color;
-                margin-right: 20px;
-                margin-left: 5px;
+                margin-right: @margin-top;
+                margin-left: @margin-top / 4;
             }
         }
     }
     main {
         width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        .flex;
         flex-direction: column;
         .user-info {
             margin-top: 30px;
@@ -156,11 +152,10 @@
                 background-color: @color;
                 border-color: @color;
                 margin-right: 30px;
-                // margin-left: 20px;
-                width: 84px;
+                width: @width;
             }
             .el-button--default {
-                width: 84px;
+                width: @width;
             }
         }
     }

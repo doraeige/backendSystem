@@ -13,50 +13,52 @@
                     </div>
                 </el-col>
             </el-row>
-            <el-col :span="12"><div class="grid-content bg-purple">待处理事务</div></el-col>
-            <el-table
-                :data="tableData"
-                border
-                :show-header="false">
-                <el-table-column
-                prop="row1"
-                label=""
-                width="286"> 
-                    <template slot-scope="scope">
-                        <span v-for="(item, index) in scope.row.row1">
-                            {{item.text}}
-                            <span style="float:right;margin-left:5px"> )</span>
-                            <span style="float:right;color:#D23029">{{item.num}}</span>
-                            <span style="float:right;margin-right:5px">( </span>
-                        </span>
-                    </template>   
-                </el-table-column>    
-                <el-table-column
-                    prop="row2"
-                    label=""
-                    width="286">
-                        <template slot-scope="scope">
-                            <span v-for="(item, index) in scope.row.row2">
-                                {{item.text}}
-                                <span style="float:right;margin-left:5px"> )</span>
-                                <span style="float:right;color:#D23029">{{item.num}}</span>
-                                <span style="float:right;margin-right:5px">( </span>
-                            </span>
-                        </template>
-                    </el-table-column>
+            <el-row>
+                <el-col :span="12"><div class="grid-content bg-purple">待处理事务</div></el-col>
+                <el-table
+                    :data="tableData"
+                    border
+                    :show-header="false">
                     <el-table-column
-                    prop="row3"
-                    label=""> 
+                    prop="row1"
+                    label=""
+                    width="286"> 
                         <template slot-scope="scope">
-                            <span v-for="(item, index) in scope.row.row3">
+                            <span v-for="(item, index) in scope.row.row1">
                                 {{item.text}}
                                 <span style="float:right;margin-left:5px"> )</span>
                                 <span style="float:right;color:#D23029">{{item.num}}</span>
                                 <span style="float:right;margin-right:5px">( </span>
                             </span>
-                        </template>        
-                    </el-table-column>
-            </el-table>
+                        </template>   
+                    </el-table-column>    
+                    <el-table-column
+                        prop="row2"
+                        label=""
+                        width="286">
+                            <template slot-scope="scope">
+                                <span v-for="(item, index) in scope.row.row2">
+                                    {{item.text}}
+                                    <span style="float:right;margin-left:5px"> )</span>
+                                    <span style="float:right;color:#D23029">{{item.num}}</span>
+                                    <span style="float:right;margin-right:5px">( </span>
+                                </span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                        prop="row3"
+                        label=""> 
+                            <template slot-scope="scope">
+                                <span v-for="(item, index) in scope.row.row3">
+                                    {{item.text}}
+                                    <span style="float:right;margin-left:5px"> )</span>
+                                    <span style="float:right;color:#D23029">{{item.num}}</span>
+                                    <span style="float:right;margin-right:5px">( </span>
+                                </span>
+                            </template>        
+                        </el-table-column>
+                </el-table>
+            </el-row>
             <el-row>
                 <el-col :span="12">
                     <div class="grid-content bg-purple">运营快捷入口</div>
@@ -374,22 +376,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-    @text-color: #595757;
-    @color: #5BC0BF;
-    @border: 1px solid #ebeef5;
-    @margin-top: 20px;
-    .bg-purple {
-        width: 100%;
-        height: 40px;
-        line-height: 40px;
-        background: #EFEFEF;
-        font-size:15px;
-        font-family: MicrosoftYaHei-Bold;
-        font-weight: bold;
-        color: rgba(89,87,87,1);
-        padding-left: 14px;
-        box-sizing: border-box;
-    }
+    @import '../../../assets/common.less';
     .systemIndex /deep/ .el-table .cell {
         padding: 0 20px;
     }
@@ -486,7 +473,7 @@ export default {
                         margin-bottom: 8px;
                     }
                     .order-num {
-                        font-size: 20px;
+                        font-size: @margin-top;
                         color: @text-color;
                         margin-bottom: 8px;
                     }
