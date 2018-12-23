@@ -48,7 +48,7 @@
                                 default-first-option
                                 placeholder="请选择品牌">
                                 <el-option
-                                    v-for="item in formInline.options"
+                                    v-for="item in formInline.options1"
                                     :key="item.value"
                                     :label="item.label"
                                     :value="item.value">
@@ -81,21 +81,36 @@
                     options: [
                         {
                             value: '选项1',
-                            label: '黄金糕'
+                            label: '裤子'
                         }, {
                             value: '选项2',
-                            label: '双皮奶'
+                            label: '大衣'
                         }, {
                             value: '选项3',
-                            label: '蚵仔煎'
+                            label: '上衣'
                         }, {
                             value: '选项4',
-                            label: '龙须面'
+                            label: '外套'
                         }, {
                             value: '选项5',
-                            label: '北京烤鸭'
+                            label: '帽子'
                         }
-                    ] 
+                    ],
+                    options1: [
+                        {
+                            value: '选项1',
+                            label: '南极人'
+                        }, {
+                            value: '选项2',
+                            label: '优衣库'
+                        }, {
+                            value: '选项3',
+                            label: '海澜之家'
+                        }, {
+                            value: '选项4',
+                            label: 'H&M'
+                        }
+                    ]
                 }
             }
         },
