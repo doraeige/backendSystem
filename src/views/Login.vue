@@ -1,15 +1,11 @@
-<!-- <i slot="prefix" class="el-input__icon iconfont icon-user"></i> -->
-<!-- <i slot="prefix" class="el-input__icon iconfont icon-icon2"></i> -->
-<!-- <i slot="suffix" class="el-input__icon iconfont icon-cuowu" v-if="writing"></i>    --> 
 <template>
     <div class="login">
         <div class="wrapper">
+            <!--  @focus="handleFocus" @blur="handleBlur" -->
             <header>后台业务管理系统</header>
-            <el-input placeholder="请输入用户名称" v-model="form.loginName" class="accountInput" @focus="handleFocus" @blur="handleBlur"> 
-                <i slot="suffix" class="el-input__icon el-icon-error" v-if="writing"></i> 
+            <el-input placeholder="请输入用户名称" v-model="form.loginName" class="accountInput" clearable> 
             </el-input>
-            <el-input placeholder="请输入登录密码" type="password" v-model="form.loginPassword" class="passwordInput" @focus="handleFocus" @blur="handleBlur">
-                <i slot="suffix" class="el-input__icon el-icon-error" v-if="writing"></i>
+            <el-input placeholder="请输入登录密码" type="password" v-model="form.loginPassword" class="passwordInput" clearable>
             </el-input>
             <div class="login_fail" v-if="loginPrompt" v-cloak>
                 <i class="iconfont icon-tishi icon"></i>
@@ -32,23 +28,11 @@ export default {
             },
             fullscreenLoading: false,
             prompt: '',
-            writing: false,
+            // writing: false,
             loginPrompt: false //隐藏提示框
         }
     },
     methods: {
-        // 输入框获得焦点时，出现右侧icon
-        handleFocus(item){
-            if (item) {
-                this.writing = true
-            }
-        },
-        // 输入框失去焦点时，隐藏右侧icon
-        handleBlur(item){
-            if (item) {
-                this.writing = false
-            }
-        },
         // 登录请求
         onSubmit() {
             this.axios.post('/api/merchant/login', this.form, {

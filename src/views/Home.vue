@@ -163,17 +163,22 @@ export default {
             }
         }
         .el-aside {
+            width: 14.5%;
             font-family: @font-family;
-            height: 100vh;
+            height: 100%;
             background-color: rgba(239,239,239,1);
             color: rgba(89,87,87,1);
             border: 1px solid #ebeef5;
         }
     
         .el-main {
+            width: 85.5%;
+            height: 100%;
             background-color: @color;
             font-family: @font-family;
             padding: 0;
+            margin-bottom: 20px;
+            box-sizing: border-box;
         }
     }
 </style>

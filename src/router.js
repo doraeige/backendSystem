@@ -32,6 +32,38 @@ export default new Router({
       path: '/loginLog',
       name: 'loginLog',
       component: () => import('./components/Home/HomeRightSide/loginLog.vue')
+    }, {
+      path: '/shopList',
+      name: 'shopList',
+      component: () => import('./components/Shop/ShopRightSide/shopList.vue')
+    }, {
+      path: '/addShop',
+      name: 'addShop',
+      component: () => import('./components/Shop/ShopRightSide/addShop.vue')
+    }, {
+      path: '/shopRecycle',
+      name: 'shopRecycle',
+      component: () => import('./components/Shop/ShopRightSide/shopRecycle.vue')
+    }, {
+      path: '/shopComment',
+      name: 'shopComment',
+      component: () => import('./components/Shop/ShopRightSide/shopComment.vue')
+    }, {
+      path: '/shopSort',
+      name: 'shopSort',
+      component: () => import('./components/Shop/ShopRightSide/shopSort.vue')
+    }, {
+      path: '/shopType',
+      name: 'shopType',
+      component: () => import('./components/Shop/ShopRightSide/shopType.vue')
+    }, {
+      path: '/brandManagement',
+      name: 'brandManagement',
+      component: () => import('./components/Shop/ShopRightSide/brandManagement.vue')
+    }, {
+      path: '/libraryManagement',
+      name: 'libraryManagement',
+      component: () => import('./components/Shop/ShopRightSide/libraryManagement.vue')
     }]
   }]
 })

@@ -41,13 +41,9 @@ export default {
 
 <style scoped lang="less">
     .homeSideBar {
-        .el-menu-item, .el-submenu__title{
-            height: 39px;
-            line-height: 39px;
-        }
         .el-menu-item.is-disabled {
             cursor: default;
-            color: #B9B9BA;
+            color: #000 !important;
         }
         .el-menu-item.is-active { 
             color: #5BC0BF;
