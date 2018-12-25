@@ -118,7 +118,7 @@
                     label="SKU库存"
                     width="70">
                     <template slot-scope="scope">
-                        <i class="el-icon-edit"></i>
+                        <i class="iconfont icon-bianji"></i>
                     </template>
                 </el-table-column>
                 <el-table-column
@@ -299,8 +299,8 @@
         width: 960px;
     }
     .shopList /deep/ .el-input__inner {
-        height: 30px;
-        line-height: 30px;
+        height: 28px;
+        line-height: 28px;
     }
     .shopList /deep/ .el-input__icon {
         line-height: 0;
@@ -375,6 +375,10 @@
                 font-size: 12px;
                 .status {
                     color: @color;
+                }
+                .icon-bianji {
+                    color: @color;
+                    font-weight: bold;
                 }
             }  
             .list-header {
