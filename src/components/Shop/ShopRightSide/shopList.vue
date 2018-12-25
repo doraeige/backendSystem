@@ -1,5 +1,5 @@
 <template>
-    <div class="shopList">
+    <div class="shopList" v-cloak>
         <common-nav :title="title"></common-nav>
         <el-row>
             <el-col  class="shopStatus common">
@@ -23,15 +23,14 @@
                         <el-radio-button label="right">高级检索</el-radio-button>
                     </el-radio-group>
                 </div>
-                <div class="inquireDiv">
+                <div class="inquireDiv" v-show="isClick">
                     <el-form :inline="true" :model="formInline" class="demo-form-inline">
-                        <el-form-item label="输入搜索" style="margin-left: 10px;">
+                        <el-form-item label="输入搜索" style="margin-left: 20px;">
                             <el-input v-model="formInline.input" placeholder="商品名称/商品货号"></el-input>
                         </el-form-item>
-                        <el-form-item label="商品分类" style="margin-left: 10px;">
+                        <el-form-item label="商品分类" style="margin-left: 20px;">
                             <el-select 
                                 v-model="formInline.value"
-                                filterable
                                 placeholder="请选择商品分类">
                                 <el-option
                                     v-for="item in formInline.options"
@@ -41,10 +40,9 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="商品品牌" style="margin-left: 10px;">
+                        <el-form-item label="商品品牌" style="margin-left: 20px;">
                            <el-select
                                 v-model="formInline.value1"
-                                filterable
                                 default-first-option
                                 placeholder="请选择品牌">
                                 <el-option
@@ -58,6 +56,124 @@
                         </el-form>
                 </div>               
             </el-col>
+        </el-row>
+        <el-row class="common">
+            <el-col :span="12" class="list-header">
+                <div class="grid-content bg-purple">数据列表</div>
+            </el-col>
+            <el-table
+                ref="multipleTable"
+                :data="tableData.slice((currentPage - 1) * pagesize,currentPage * pagesize)"
+                border
+                tooltip-effect="dark"
+                @selection-change="handleSelectionChange">
+                <el-table-column
+                    type="selection"
+                    width="55">
+                </el-table-column>
+                <el-table-column
+                    prop="number"
+                    label="编号"
+                    width="90">
+                </el-table-column>
+                <el-table-column
+                    label="商品图片"
+                    width="120">
+                    <template slot-scope="scope">
+                        <img :src="scope.row.imgUrl" alt="商品图片" width="92" height="66" >
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    label="商品名称"
+                    width="120">
+                    <template slot-scope="scope">
+                        {{ scope.row.shopName }}
+                        品牌：{{ scope.row.shopBrand }}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    label="价格/货号"
+                    width="105">
+                    <template slot-scope="scope">
+                        价格：￥{{ scope.row.price }}
+                        货号：{{ scope.row.shopNum }}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    prop="tag"
+                    label="标签"
+                    width="80">
+                    <template slot-scope="scope">
+                        上架 <el-switch v-model="scope.row.value1" active-color="#13ce66"></el-switch>
+                        <span class="status">新品</span> <el-switch v-model="scope.row.value2" active-color="#13ce66"></el-switch>
+                        <span class="status">推荐</span> <el-switch v-model="scope.row.value3" active-color="#13ce66"></el-switch>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    prop="sort"
+                    label="排序"
+                    width="60">
+                </el-table-column>
+                <el-table-column
+                    label="SKU库存"
+                    width="70">
+                    <template slot-scope="scope">
+                        <i class="el-icon-edit"></i>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                    prop="sale"
+                    label="销量"
+                    width="70">
+                </el-table-column>
+                <el-table-column
+                    label="审核状态"
+                    width="76">
+                    <template slot-scope="scope">
+                        {{ scope.row.status }}
+                        <p class="status">审核详情</p>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button
+                        size="mini"
+                        type="primary">查看</el-button>
+                        <el-button
+                        size="mini"
+                        type="success">编辑</el-button>
+                        <el-button
+                        size="mini"
+                        type="warning">日志</el-button>
+                        <el-button
+                        size="mini"
+                        type="danger">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                background
+                :page-sizes="[10, 20, 30, 40]"
+                :page-size="pagesize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="tableData.length">    
+            </el-pagination>
+            <div class="left-side">
+                    <el-checkbox @change="handleCheckAllChange">全选</el-checkbox>
+                    <el-select v-model="value" placeholder="批量操作" class="select-input">
+                        <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value"
+                        >
+                        </el-option>
+                    </el-select>
+                    <el-button size="mini" @click="onSubmit">确定</el-button>
+                </div>
         </el-row>
     </div>
 </template>
@@ -73,7 +189,7 @@
             return {
                 title: '商品列表',
                 isClick: false,
-                input: '',
+                checkAll: false,
                 formInline: {
                     input: '',
                     value: [],
@@ -111,13 +227,68 @@
                             label: 'H&M'
                         }
                     ]
-                }
+                },
+                multipleSelection: [],
+                tableData: [],
+                currentPage: 1,
+                pagesize: 10,
+                options: [
+                    {
+                        value: '选项1',
+                        label: '商品上架'
+                    }, {
+                        value: '选项2',
+                        label: '商品下架'
+                    }, {
+                        value: '选项3',
+                        label: '设为推荐'
+                    }, {
+                        value: '选项4',
+                        label: '取消推荐'
+                    }, {
+                        value: '选项5',
+                        label: '设为新品'
+                    }, {
+                        value: '选项6',
+                        label: '取消新品'
+                    }
+                ],
+                value: ''
             }
         },
         methods: {
             handleClickStatu: function() {
                 this.isClick = !this.isClick
+            },
+            handleSelectionChange(val) {
+                this.multipleSelection = val
+                console.log(val.length)
+                console.log(this.multipleSelection.length)   
+            },
+            handleCheckAllChange() {
+                this.$refs.multipleTable.toggleAllSelection()
+            },
+            handleSizeChange(psize) {
+                console.log(psize)
+                this.pagesize = psize
+            },
+            handleCurrentChange(cpage) {
+                console.log(cpage)
+                this.currentPage = cpage
+            },
+            onSubmit() {
+                console.log('submit')
             }
+        },
+        mounted() {
+            this.axios.get('/shoplist').then(res => {
+                // console.log(res.data)
+                if(res.data.success){
+                    this.tableData = res.data.data.tableData
+                }
+            }).catch(err => {
+                console.log(err)
+            })
         }
     }
 </script>
@@ -125,11 +296,48 @@
 <style scoped lang="less">
     @import '../../../assets/common.less';
     .shopList /deep/ .el-col-12 {
-        width: 870px;
+        width: 960px;
     }
     .shopList /deep/ .el-input__inner {
         height: 30px;
         line-height: 30px;
+    }
+    .shopList /deep/ .el-input__icon {
+        line-height: 0;
+    }
+    .shopList /deep/ .el-table .cell {
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+    }
+    .shopList /deep/ .el-button--mini {
+        padding: 7px 8px;
+        margin-top: 6px;
+        margin-left: 5px;
+    }
+    .shopList /deep/ .el-pagination .el-select .el-input .el-input__inner {
+        margin-top: -3px;
+    }
+    .shopList /deep/ .el-pagination__total {
+        margin-right: 2px;
+    }
+    .shopList /deep/ .el-pagination__sizes {
+        margin-right: 0;
+    }
+    .shopList /deep/ .el-pagination.is-background .el-pager li {
+        margin: 0 2px;
+    }
+    .shopList /deep/ .el-pagination.is-background .btn-next {
+        margin: 0 2px;
+    }
+    .shopList /deep/ .el-pagination.is-background .btn-pre {
+        margin: 0 2px;
+    }
+    .shopList /deep/ .el-pagination__jump {
+        margin-left: 0;
+    }
+    .shopList /deep/ .el-pagination__editor.el-input {
+        width: 40px;
     }
     .shopList {
         .shopStatus {
@@ -141,7 +349,7 @@
             }
         }
         .common {
-            padding-left:calc((100% - 870px) / 2);
+            padding-left: calc((100% - 960px) / 2);
             .bg-purple {
                 position: relative;
                 border: @border;
@@ -149,12 +357,11 @@
                 .inquire {
                     position: absolute;
                     right: 200px;
-                    top: 2px;
                 }
                 .right {
                     position: absolute;
                     right: 8px;
-                    top: 4.5px;
+                    top: 3px;
                 }
             }
             .inquireDiv {
@@ -162,7 +369,40 @@
                 line-height: 40px;
                 border: @border;
                 font-size: 12px;
-            }          
+            }
+            .el-table {
+                width: 960px;
+                font-size: 12px;
+                .status {
+                    color: @color;
+                }
+            }  
+            .list-header {
+                margin-top: @margin-top;
+            }
+            .el-pagination {
+                text-align: right;
+                width: 948px !important;
+                background-color: #F7F8F8;
+                border: @border;
+                border-top: 0;
+            }
+            .left-side {
+                position: absolute;
+                bottom: -4px;
+                margin-left: 20px;
+                .flex;
+                .el-select {
+                    box-sizing: border-box;
+                    margin-left: 10px;
+                    margin-bottom: 2px;
+                    width: 110px;
+                }
+                .el-button--mini {
+                    margin-bottom: 7px;
+                }
+            }
         }
+        
     }
 </style>
