@@ -65,10 +65,11 @@
                 ref="multipleTable"
                 :data="tableData.slice((currentPage - 1) * pagesize,currentPage * pagesize)"
                 border
-                tooltip-effect="dark"
+                :row-key="getRowKeys"
                 @selection-change="handleSelectionChange">
                 <el-table-column
                     type="selection"
+                    :reserve-selection="true"
                     width="55">
                 </el-table-column>
                 <el-table-column
@@ -136,18 +137,10 @@
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
-                        <el-button
-                        size="mini"
-                        type="primary">查看</el-button>
-                        <el-button
-                        size="mini"
-                        type="success">编辑</el-button>
-                        <el-button
-                        size="mini"
-                        type="warning">日志</el-button>
-                        <el-button
-                        size="mini"
-                        type="danger">删除</el-button>
+                        <span class="scope-text">查看</span>
+                        <span class="scope-text">编辑</span>
+                        <span class="scope-text">日志</span>
+                        <span class="scope-text danger">删除</span>
                     </template>
                 </el-table-column>
             </el-table>
@@ -156,13 +149,13 @@
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
                 background
-                :page-sizes="[10, 20, 30, 40]"
+                :page-sizes="[5, 10, 20, 30, 40]"
                 :page-size="pagesize"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="tableData.length">    
             </el-pagination>
             <div class="left-side">
-                    <el-checkbox @change="handleCheckAllChange">全选</el-checkbox>
+                    <el-checkbox :indeterminate="indeterminate" v-model="checkAll">全选</el-checkbox>
                     <el-select v-model="value" placeholder="批量操作" class="select-input">
                         <el-option
                             v-for="item in options"
@@ -189,7 +182,8 @@
             return {
                 title: '商品列表',
                 isClick: false,
-                checkAll: false,
+                // checkAll: false,
+                // isIndeterminate: false,
                 formInline: {
                     input: '',
                     value: [],
@@ -229,9 +223,11 @@
                     ]
                 },
                 multipleSelection: [],
+                pageArr: [],
                 tableData: [],
                 currentPage: 1,
-                pagesize: 10,
+                pagesize: 5,
+                page: 1,
                 options: [
                     {
                         value: '选项1',
@@ -257,17 +253,29 @@
             }
         },
         methods: {
+            getRowKeys(row) {
+                return row.number
+            },
             handleClickStatu: function() {
                 this.isClick = !this.isClick
             },
             handleSelectionChange(val) {
+                console.log(val)
+                // let vlength = val.length
                 this.multipleSelection = val
-                console.log(val.length)
-                console.log(this.multipleSelection.length)   
+                console.log(this.multipleSelection)
+            //     console.log(this.checkAll)
+            //     this.checkAll = vlength === this.pagesize
+            //     console.log(this.checkAll)
+            //     this.isIndeterminate = vlength > 0 && vlength < this.pagesize
+            //     console.log(this.isIndeterminate)
             },
-            handleCheckAllChange() {
-                this.$refs.multipleTable.toggleAllSelection()
-            },
+            // handleCheckAllChange() {
+            //     console.log(this.checkAll)
+            //     console.log(this.isIndeterminate) 
+            //     this.$refs.multipleTable.toggleAllSelection()
+            //     this.isIndeterminate = false
+            // },
             handleSizeChange(psize) {
                 console.log(psize)
                 this.pagesize = psize
@@ -278,6 +286,29 @@
             },
             onSubmit() {
                 console.log('submit')
+            }
+        },
+        computed: {
+            indeterminate(){
+                // this.pageArr = this.multipleSelection.slice((this.currentPage - 1) * this.pagesize,this.currentPage * this.pagesize)
+                // console.log(this.pageArr)
+                // console.log(this.currentPage)
+                // if (this.currentPage > 1) {
+                //     return this.pageArr.length < this.pagesize && this.pageArr.length >= 0
+                // } else {
+                //     return this.pageArr.length < this.pagesize && this.pageArr.length > 0
+                // }
+                return this.multipleSelection.length < this.pagesize && this.multipleSelection.length > 0
+                
+            },
+            checkAll: {
+                get() {
+                    this.pageArr = this.multipleSelection.slice((this.currentPage - 1) * this.pagesize,this.currentPage * this.pagesize)
+                    return this.pageArr.length === this.pagesize
+                },
+                set(val) {
+                    this.$refs.multipleTable.toggleAllSelection(val)
+                }
             }
         },
         mounted() {
@@ -379,6 +410,15 @@
                 .icon-bianji {
                     color: @color;
                     font-weight: bold;
+                }
+                .scope-text {
+                    display: inline-block;
+                    margin: 8px;
+                    color: @color;
+                    text-decoration: underline;
+                }
+                .danger {
+                    color: #D23029;
                 }
             }  
             .list-header {
