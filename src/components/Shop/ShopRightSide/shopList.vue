@@ -74,36 +74,46 @@
                         <img :src="scope.row.imgUrl" alt="商品图片" width="92" height="66" >
                     </template>
                 </el-table-column>
-                <el-table-column label="商品名称" width="120">
+                <el-table-column label="商品名称" width="132">
                     <template slot-scope="scope">
-                        {{ scope.row.shopName }}
-                        品牌：{{ scope.row.shopBrand }}
+                        <p class="scope-table_text">{{ scope.row.shopName }}</p>
+                        <p class="scope-table_text">品牌：{{ scope.row.shopBrand }}</p>
                     </template>
                 </el-table-column>
                 <el-table-column label="价格/货号" width="105">
-                    <template slot-scope="scope" class="scope-style">
-                        价格：￥{{ scope.row.price }}
-                        货号：No{{ scope.row.shopNum }}
+                    <template slot-scope="scope">
+                        <p class="scope-style">价格：￥{{ scope.row.price }}</p>
+                        <p class="scope-style">货号：No{{ scope.row.shopNum }}</p>
                     </template>
                 </el-table-column>
                 <el-table-column prop="tag" label="标签" width="80">
                     <template slot-scope="scope">
-                        上架 <el-switch v-model="scope.row.value1" active-color="#13ce66"></el-switch>
-                        <span class="status">新品</span> <el-switch v-model="scope.row.value2" active-color="#13ce66"></el-switch>
-                        <span class="status">推荐</span> <el-switch v-model="scope.row.value3" active-color="#13ce66"></el-switch>
+                        <p>上架<el-switch v-model="scope.row.value1" active-color="#13ce66"></el-switch></p>
+                        <p class="scope-status">新品<el-switch v-model="scope.row.value2" active-color="#13ce66"></el-switch></p>
+                        <p class="scope-status">推荐<el-switch v-model="scope.row.value3" active-color="#13ce66"></el-switch></p>
                     </template>
                 </el-table-column>
-                <el-table-column prop="sort" label="排序" width="60"></el-table-column>
+                <el-table-column prop="sort" label="排序" width="50"></el-table-column>
                 <el-table-column label="SKU库存" width="70">
                     <template slot-scope="scope">
-                        <i class="iconfont icon-bianji"></i>
+                        <el-popover
+                            placement="right"
+                            width="400"
+                            trigger="click">
+                            <el-table :data="gridData">
+                                <el-table-column width="150" property="date" label="日期"></el-table-column>
+                                <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                                <el-table-column width="300" property="address" label="地址"></el-table-column>
+                            </el-table>
+                            <el-button slot="reference"><i class="iconfont icon-bianji"></i></el-button>
+                        </el-popover>
                     </template>
                 </el-table-column>
                 <el-table-column prop="sale" label="销量" width="70"></el-table-column>
                 <el-table-column label="审核状态" width="76">
                     <template slot-scope="scope">
                         {{ scope.row.status }}
-                        <p class="status">审核详情</p>
+                        <p class="scope-status">审核详情</p>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
@@ -141,12 +151,27 @@
     import CommonNav from '../../common/CommonNav.vue'
     export default {
         name: 'shopList',
-        components: {
-            CommonNav
-        },
-        inject: ['reload'],
+        components: {CommonNav},
+        // inject: ['reload'],
         data(){
             return {
+                gridData: [{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                    }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                    }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                    }, {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }],
                 title: '商品列表',
                 isClick: false,
                 checkAll: false,
@@ -302,6 +327,9 @@
     .shopList /deep/ .el-col-12 {
         width: 960px;
     }
+    .shopList /deep/ .el-button {
+        border: 0;
+    }
     .shopList /deep/ .el-input__inner {
         height: 28px;
         line-height: 28px;
@@ -343,6 +371,9 @@
     .shopList /deep/ .el-pagination__editor.el-input {
         width: 40px;
     }
+    .shopList /deep/ .el-table td, .el-table th {
+        padding: 6px 0;
+    }
     .shopList {
         .shopStatus {
             margin-top: @margin-top;
@@ -377,7 +408,7 @@
             .el-table {
                 width: 960px;
                 font-size: 12px;
-                .status {
+                .scope-status {
                     color: @color;
                 }
                 .icon-bianji {
@@ -386,9 +417,16 @@
                 }
                 .scope-text {
                     display: inline-block;
-                    margin: 8px;
+                    margin: 7px;
                     color: @color;
                     text-decoration: underline;
+                }
+                .scope-table_text {
+                    text-align: left;
+                    margin-left: 6px;
+                }
+                .scope-style {
+                    text-align: left;
                 }
                 .danger {
                     color: #D23029;

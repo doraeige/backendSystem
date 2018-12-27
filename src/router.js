@@ -49,9 +49,9 @@ export default new Router({
       name: 'shopComment',
       component: () => import('./components/Shop/ShopRightSide/shopComment.vue')
     }, {
-      path: '/shopSort',
-      name: 'shopSort',
-      component: () => import('./components/Shop/ShopRightSide/shopSort.vue')
+      path: '/shopClassification',
+      name: 'shopClassification',
+      component: () => import('./components/Shop/ShopRightSide/shopClassification.vue')
     }, {
       path: '/shopType',
       name: 'shopType',
