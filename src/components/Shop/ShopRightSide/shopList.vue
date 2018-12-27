@@ -67,69 +67,40 @@
                 border
                 :row-key="getRowKeys"
                 @selection-change="handleSelectionChange">
-                <el-table-column
-                    type="selection"
-                    :reserve-selection="true"
-                    width="55">
-                </el-table-column>
-                <el-table-column
-                    prop="number"
-                    label="编号"
-                    width="90">
-                </el-table-column>
-                <el-table-column
-                    label="商品图片"
-                    width="120">
+                <el-table-column type="selection" :reserve-selection="true" width="55"></el-table-column>
+                <el-table-column prop="number" label="编号" width="90"></el-table-column>
+                <el-table-column label="商品图片" width="120">
                     <template slot-scope="scope">
                         <img :src="scope.row.imgUrl" alt="商品图片" width="92" height="66" >
                     </template>
                 </el-table-column>
-                <el-table-column
-                    label="商品名称"
-                    width="120">
+                <el-table-column label="商品名称" width="120">
                     <template slot-scope="scope">
                         {{ scope.row.shopName }}
                         品牌：{{ scope.row.shopBrand }}
                     </template>
                 </el-table-column>
-                <el-table-column
-                    label="价格/货号"
-                    width="105">
-                    <template slot-scope="scope">
+                <el-table-column label="价格/货号" width="105">
+                    <template slot-scope="scope" class="scope-style">
                         价格：￥{{ scope.row.price }}
-                        货号：{{ scope.row.shopNum }}
+                        货号：No{{ scope.row.shopNum }}
                     </template>
                 </el-table-column>
-                <el-table-column
-                    prop="tag"
-                    label="标签"
-                    width="80">
+                <el-table-column prop="tag" label="标签" width="80">
                     <template slot-scope="scope">
                         上架 <el-switch v-model="scope.row.value1" active-color="#13ce66"></el-switch>
                         <span class="status">新品</span> <el-switch v-model="scope.row.value2" active-color="#13ce66"></el-switch>
                         <span class="status">推荐</span> <el-switch v-model="scope.row.value3" active-color="#13ce66"></el-switch>
                     </template>
                 </el-table-column>
-                <el-table-column
-                    prop="sort"
-                    label="排序"
-                    width="60">
-                </el-table-column>
-                <el-table-column
-                    label="SKU库存"
-                    width="70">
+                <el-table-column prop="sort" label="排序" width="60"></el-table-column>
+                <el-table-column label="SKU库存" width="70">
                     <template slot-scope="scope">
                         <i class="iconfont icon-bianji"></i>
                     </template>
                 </el-table-column>
-                <el-table-column
-                    prop="sale"
-                    label="销量"
-                    width="70">
-                </el-table-column>
-                <el-table-column
-                    label="审核状态"
-                    width="76">
+                <el-table-column prop="sale" label="销量" width="70"></el-table-column>
+                <el-table-column label="审核状态" width="76">
                     <template slot-scope="scope">
                         {{ scope.row.status }}
                         <p class="status">审核详情</p>
@@ -155,17 +126,12 @@
                 :total="tableData.length">    
             </el-pagination>
             <div class="left-side">
-                    <el-checkbox :indeterminate="indeterminate" v-model="checkAll">全选</el-checkbox>
-                    <el-select v-model="value" placeholder="批量操作" class="select-input">
-                        <el-option
-                            v-for="item in options"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value"
-                        >
-                        </el-option>
+                <!-- :indeterminate="indeterminate" v-model="checkAll" @change="handleCheckAllChange" -->
+                    <el-checkbox :indeterminate="indeterminate" @change="handleCheckAllChange">全选</el-checkbox>
+                    <el-select v-model="itemId" placeholder="批量操作" class="select-input">
+                        <el-option v-for="item in options" :key="item.id" :label="item.label" :value="item.id"></el-option>
                     </el-select>
-                    <el-button size="mini" @click="onSubmit">确定</el-button>
+                    <el-button size="mini" @click="onSubmit(itemId)">确定</el-button>
                 </div>
         </el-row>
     </div>
@@ -178,11 +144,12 @@
         components: {
             CommonNav
         },
+        inject: ['reload'],
         data(){
             return {
                 title: '商品列表',
                 isClick: false,
-                // checkAll: false,
+                checkAll: false,
                 // isIndeterminate: false,
                 formInline: {
                     input: '',
@@ -230,85 +197,91 @@
                 page: 1,
                 options: [
                     {
-                        value: '选项1',
+                        id: 1,
                         label: '商品上架'
                     }, {
-                        value: '选项2',
+                        id: 2,
                         label: '商品下架'
                     }, {
-                        value: '选项3',
-                        label: '设为推荐'
-                    }, {
-                        value: '选项4',
-                        label: '取消推荐'
-                    }, {
-                        value: '选项5',
+                        id: 3,
                         label: '设为新品'
                     }, {
-                        value: '选项6',
+                        id: 4,
                         label: '取消新品'
+                    }, {
+                        id: 5,
+                        label: '设为推荐'
+                    }, {
+                        id: 6,
+                        label: '取消推荐'
                     }
                 ],
-                value: ''
+                actions: {
+                    '1': ['value1', true],
+                    '2': ['value1', false],
+                    '3': ['value2', true],
+                    '4': ['value2', false],
+                    '5': ['value3', true],
+                    '6': ['value3', false]
+                },
+                itemId: '',
+                getRowKeys(row) {
+                    return row.number
+                },
             }
         },
         methods: {
-            getRowKeys(row) {
-                return row.number
-            },
             handleClickStatu: function() {
                 this.isClick = !this.isClick
             },
             handleSelectionChange(val) {
-                console.log(val)
-                // let vlength = val.length
                 this.multipleSelection = val
-                console.log(this.multipleSelection)
-            //     console.log(this.checkAll)
-            //     this.checkAll = vlength === this.pagesize
-            //     console.log(this.checkAll)
-            //     this.isIndeterminate = vlength > 0 && vlength < this.pagesize
-            //     console.log(this.isIndeterminate)
             },
-            // handleCheckAllChange() {
-            //     console.log(this.checkAll)
-            //     console.log(this.isIndeterminate) 
-            //     this.$refs.multipleTable.toggleAllSelection()
-            //     this.isIndeterminate = false
-            // },
+            handleCheckAllChange() {
+                if ( this.checkAll ) {
+                    this.tableData.forEach(row => {
+                        this.$refs.multipleTable.toggleRowSelection(row, false)
+                    })
+                    this.checkAll = false
+                } else {
+                    this.tableData.forEach(row => {
+                        this.$refs.multipleTable.toggleRowSelection(row, true)
+                    })
+                    this.checkAll = true
+                }      
+            },
+            /**
+            * 按钮点击事件
+            * @param {number} psize: 每页展示个数
+            */
             handleSizeChange(psize) {
                 console.log(psize)
                 this.pagesize = psize
             },
+            /**
+            * 按钮点击事件
+            * @param {number} cpage: 页码
+            */
             handleCurrentChange(cpage) {
                 console.log(cpage)
                 this.currentPage = cpage
             },
-            onSubmit() {
-                console.log('submit')
+            /**
+            * 按钮点击事件
+            * @param {number} status: 1 商品上架 2 商品下架 3 设为新品 4 取消新品 5 设为推荐 6 取消推荐
+            * @param {array} multipleSelection 选中的数据
+            * this.$set(item, value, boolean) Vue 数组更新检测 响应表格数据
+            */
+            onSubmit(status) {
+                let action = this.actions[status]
+                let value = action[0]
+                let boolean = action[1]
+                this.multipleSelection.forEach(item => this.$set(item, value, boolean))
             }
         },
         computed: {
             indeterminate(){
-                // this.pageArr = this.multipleSelection.slice((this.currentPage - 1) * this.pagesize,this.currentPage * this.pagesize)
-                // console.log(this.pageArr)
-                // console.log(this.currentPage)
-                // if (this.currentPage > 1) {
-                //     return this.pageArr.length < this.pagesize && this.pageArr.length >= 0
-                // } else {
-                //     return this.pageArr.length < this.pagesize && this.pageArr.length > 0
-                // }
-                return this.multipleSelection.length < this.pagesize && this.multipleSelection.length > 0
-                
-            },
-            checkAll: {
-                get() {
-                    this.pageArr = this.multipleSelection.slice((this.currentPage - 1) * this.pagesize,this.currentPage * this.pagesize)
-                    return this.pageArr.length === this.pagesize
-                },
-                set(val) {
-                    this.$refs.multipleTable.toggleAllSelection(val)
-                }
+                return this.multipleSelection.length > 0 &&  this.multipleSelection.length < this.tableData.length
             }
         },
         mounted() {

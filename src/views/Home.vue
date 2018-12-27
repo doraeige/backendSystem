@@ -141,7 +141,7 @@ export default {
                 }
             }
             .icon-item {
-                margin-left: 50px;
+                // margin-left: 50px;
                 &:after {
                     position: absolute;
                     right: 0;
