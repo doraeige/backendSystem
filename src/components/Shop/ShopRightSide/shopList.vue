@@ -312,7 +312,7 @@
         mounted() {
             this.axios.get('/shoplist').then(res => {
                 // console.log(res.data)
-                if(res.data.success){
+                if(res.data.error_code == 0){
                     this.tableData = res.data.data.tableData
                 }
             }).catch(err => {

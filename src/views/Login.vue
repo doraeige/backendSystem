@@ -3,9 +3,9 @@
         <div class="wrapper">
             <!--  @focus="handleFocus" @blur="handleBlur" -->
             <header>后台业务管理系统</header>
-            <el-input placeholder="请输入用户名称" v-model="form.loginName" class="accountInput" clearable> 
+            <el-input placeholder="请输入用户名称" v-model="loginName" class="accountInput" clearable> 
             </el-input>
-            <el-input placeholder="请输入登录密码" type="password" v-model="form.loginPassword" class="passwordInput" clearable>
+            <el-input placeholder="请输入登录密码" type="password" v-model="loginPassword" class="passwordInput" clearable>
             </el-input>
             <div class="login_fail" v-if="loginPrompt" v-cloak>
                 <i class="iconfont icon-tishi icon"></i>
@@ -22,33 +22,58 @@ export default {
     name: 'login',
     data () {
         return {
-            form: {
-                loginName: '',
-                loginPassword: '',
-            },
+            // form: {
+            //     loginName: '',
+            //     loginPassword: '',
+            // },
+            loginName: '',
+            loginPassword: '',
             fullscreenLoading: false,
             prompt: '',
-            // writing: false,
             loginPrompt: false //隐藏提示框
         }
     },
+    /**
+    * 登录按钮点击事件
+    * @param {number} loginName
+    * @param {number} loginPasswor
+    * 错误: 1 请输入用户名称 2 请输入登录密码 3 用户名称或密码不正确
+    */
     methods: {
         // 登录请求
         onSubmit() {
-            this.axios.post('/api/merchant/login', this.form, {
-                type: 'form'
-            }).then( res => {
-                if (res.data.errno == 426) {
-                    this.prompt = res.data.msg
-                    this.loginPrompt = true
-                }
-                if (res.data.errno == 200) {
+            // this.axios.post('/login', this.form, {
+            //     type: 'form'
+            this.axios.post('/login', 
+            {
+                loginName: this.loginName,
+                loginPassword: this.loginPassword
+            })
+            .then( res => {
+                // if (res.data.errno == 426) {
+                //     this.prompt = res.data.error_msg
+                //     this.loginPrompt = true
+                // }
+                // if (res.data.errno == 200) {
+                //     this.fullscreenLoading = true
+                //     setTimeout(() => {
+                //         this.fullscreenLoading = false
+                //         this.$router.push('/Home')
+                //     }, 1000)
+                // } 
+                if (res.data.error_code == 0) {
+                    console.log(res)
+                    console.log('0')
                     this.fullscreenLoading = true
                     setTimeout(() => {
                         this.fullscreenLoading = false
                         this.$router.push('/Home')
                     }, 1000)
-                }    
+                }  else {
+                    console.log(res)
+                    this.prompt = res.data.error_msg
+                    this.loginPrompt = true
+                }     
             }).catch( error => {
                 console.log(error)
             })

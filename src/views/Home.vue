@@ -123,8 +123,9 @@ export default {
         right: -7px;
     }
     .home {
-        width: 100%;
+        width: 1280px;
         height: 100vh;
+        font-size: 14px;
         .el-header{
             width: 100%;
             color: @color;

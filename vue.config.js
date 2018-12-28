@@ -10,17 +10,16 @@ module.exports = {
     port: 8080, // 服务端口
     https: false, // 如果true的话,会出现安全警告
     hotOnly: false, // 热更新
-    proxy: {
-      // 配置跨域,设置代理
-      '/api': {
-        target: 'http://47.107.167.164:8080', // 跨域地址
-        ws: true, // 是否跨域
-        changOrigin: true,
-        pathRewrite: { // 重命名路径名
-          '^/api': 'api'
-        }
-      }
-    },
+    proxy: null,
+    // 配置跨域,设置代理
+    // '/api': {
+    //   target: 'http://47.107.167.164:8080', // 跨域地址
+    //   ws: true, // 是否跨域
+    //   changOrigin: true,
+    //   pathRewrite: { // 重命名路径名
+    //     '^/api': 'api'
+    //   }
+    // }
     before: app => {}
     // before: app => { // 加载相应的 json 数据
     //   http://loaclhost:8080/api/goods 打开这个网址就可以看到goods数据
