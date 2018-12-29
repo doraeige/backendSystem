@@ -10,9 +10,7 @@
                         <el-step title="填写商品信息"></el-step>
                         <el-step title="填写商品属性"></el-step>
                     </el-steps>
-                    <transition name="fade">
-                        <router-view></router-view>
-                    </transition>
+                    <router-view></router-view>
                 </el-col>
             </el-row>
             <div class="btnDiv">

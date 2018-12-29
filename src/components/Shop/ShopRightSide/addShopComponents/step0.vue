@@ -1,6 +1,8 @@
 <template>
     <div class="step1">
         <el-col :span="12">
+            <i class="iconfont icon-xiangyouzhishipaitianchongban"></i>
+            <p class="icon-text">基本信息</p>
             <span class="">您最近使用的商品分类</span>
             <el-select v-model="value" placeholder="请选择">
                 <el-option v-for="item in options" :key="item.id" :label="item.label" :value="item.id">
@@ -82,13 +84,13 @@
             selectLeftMenu(index,title) {
                 console.log(index,title)
                 this.rightMenus = this.menus[index]
-                console.log(this.rightMenus)
                 this.rightMenus.splice(0, 0)
-                console.log(this.rightMenus)
                 this.leftMenuItem = title
             },
             selectRightMenu(item) {
                 this.rightMenuItem = item
+                console.log(this.leftMenuItem, item)
+                this.$store.commit('changeItem', {leftItem: this.leftMenuItem, rightItem:item})
             }
         },
         mounted() {
@@ -107,57 +109,71 @@
 <style scoped lang="less">
     @import '../../../../assets/common.less';
     .el-col-12 {
-            margin-left: @margin-top * 5;
-            margin-top: @margin-top * 2.5;
-            box-sizing: border-box;
-            .el-select {
-                margin-left: @margin-top;
-            }
+        margin-left: @margin-top * 5;
+        margin-top: @margin-top * 2.5;
+        box-sizing: border-box;
+        position: relative;
+        .el-select {
+            margin-left: @margin-top;
         }
-        .el-col-18 {
-            margin-top: @margin-top * 3;
-            margin-left: @margin-top * 5;
-            .flex;
-            .menu-icon {
-                margin: 0 @margin-top * 3;
-                .iconfont {
-                    font-size: 33px;
-                    color: #DEF2F2;
-                }
-            }
-            .common-menu {
-                width: 253px;
-                height: 260px;
-                border: @border;
-                color: rgba(136,136,136,0.8);
-                .menu-header {
-                    line-height: 32px;  
-                    font-weight: bold;
-                    border-bottom: @border;
-                    padding-left: 10px;
-                    font-size: 15px;
-                }
-                .menu-item {
-                    border-bottom: @border;
-                    line-height: 32px;
-                    box-sizing: border-box;
-                    padding-left: 10px;
-                    padding-right: 20px;
-                    &:last-of-type {
-                        border-bottom: 0;
-                    } 
-                    .el-icon-arrow-right {
-                        float: right;
-                        line-height: 32px;
-                    }
-                }
-            }
-            .right-menu {
-                width: 253px;
-                border: @border;
-            }
-        }
-        .info {
+        .icon-xiangyouzhishipaitianchongban {
             color: @color;
+            font-size: 130px;
+            position: absolute;
+            left: -180px;
+            top: -50px;
         }
+        .icon-text {
+            color: rgba(255,255,255,0.9);
+            position: absolute;
+            top: 8px;
+            left: -170px;
+        } 
+    }
+    .el-col-18 {
+        margin-top: @margin-top * 3;
+        margin-left: @margin-top * 5;
+        .flex;
+        .menu-icon {
+            margin: 0 @margin-top * 3;
+            .iconfont {
+                font-size: 33px;
+                color: #DEF2F2;
+            }
+        }
+        .common-menu {
+            width: 253px;
+            height: 260px;
+            border: @border;
+            color: rgba(136,136,136,0.8);
+            .menu-header {
+                line-height: 32px;  
+                font-weight: bold;
+                border-bottom: @border;
+                padding-left: 10px;
+                font-size: 15px;
+            }
+            .menu-item {
+                border-bottom: @border;
+                line-height: 32px;
+                box-sizing: border-box;
+                padding-left: 10px;
+                padding-right: 20px;
+                &:last-of-type {
+                    border-bottom: 0;
+                } 
+                .el-icon-arrow-right {
+                    float: right;
+                    line-height: 32px;
+                }
+            }
+        }
+        .right-menu {
+            width: 253px;
+            border: @border;
+        }
+    }
+    .info {
+        color: @color;
+    }
 </style>

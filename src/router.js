@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login.vue'
+import step0 from './components/Shop/ShopRightSide/addShopComponents/step0.vue'
+import step1 from './components/Shop/ShopRightSide/addShopComponents/step1.vue'
+import step2 from './components/Shop/ShopRightSide/addShopComponents/step2.vue'
 
 Vue.use(Router)
 
@@ -45,21 +48,21 @@ export default new Router({
           // 路径为'/addShop'，使用组件step0
           {
             path: '',
-            component: () => import('./components/Shop/ShopRightSide/addShopComponents/step0.vue')
+            component: step0
           },
           // 路径为'/addShopComponents/step0'，使用组件step0
           {
             path: 'step0',
-            component: () => import('./components/Shop/ShopRightSide/addShopComponents/step0.vue')
+            component: step0
           },
           // 路径为'/addShopComponents/step1'，使用组件step1
           {
             path: 'step1',
-            component: () => import('./components/Shop/ShopRightSide/addShopComponents/step1.vue')
+            component: step1
           }, {
             // 路径为'/addShopComponents/step2'，使用组件step2
             path: 'step2',
-            component: () => import('./components/Shop/ShopRightSide/addShopComponents/step2.vue')
+            component: step2
           }
         ]
       }, {
