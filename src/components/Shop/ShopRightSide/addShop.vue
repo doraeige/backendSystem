@@ -14,7 +14,7 @@
                 </el-col>
             </el-row>
             <div class="btnDiv">
-                <el-button class="btn" @click.native.prevent="handlePreStep" v-show="preStep">
+                <el-button class="btn prestep" @click.native.prevent="handlePreStep" v-show="preStep">
                     上一步,
                     <span v-show="step == 1">{{step0}}</span>
                     <span v-show="step == 2">{{step1}}</span>
@@ -120,6 +120,10 @@
             background-color: @color;
             border-color: @color;
             color: #fff;
+        }
+        .prestep {
+            background-color: #fff;
+            color: @color;
         }
     }
 </style>

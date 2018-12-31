@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login.vue'
+import systemIndex from './components/Home/HomeRightSide/systemIndex.vue'
 import step0 from './components/Shop/ShopRightSide/addShopComponents/step0.vue'
 import step1 from './components/Shop/ShopRightSide/addShopComponents/step1.vue'
 import step2 from './components/Shop/ShopRightSide/addShopComponents/step2.vue'
@@ -20,6 +21,10 @@ export default new Router({
     name: 'Home',
     component: () => import('./views/Home.vue'),
     children: [
+      {
+        path: '',
+        component: systemIndex
+      },
       {
         path: '/systemIndex',
         name: 'systemIndex',

@@ -102,8 +102,7 @@
                 </el-form-item>
                 <el-form-item label="商品关键词">
                     <el-input v-model="otherForm.measurement"></el-input>
-                    <p class="number-text">商品关键词请用空格分割；有两个功能，一是可以作为站内关键词查询，
-在前台搜索框输入关键词后，能够搜索到该商品，二十作为搜索引擎收录使用</p>
+                    <p class="number-text">商品关键词请用空格分割；有两个功能，一是可以作为站内关键词查询，在前台搜索框输入关键词后，能够搜索到该商品，二十作为搜索引擎收录使用</p>
                 </el-form-item>
                 <el-form-item label="商品备注">
                     <el-input type="textarea" v-model="otherForm.productsNote" placeholder="请输入内容"></el-input>
@@ -403,6 +402,7 @@
             display: inline-block;
             margin-right: 15px;
             color: @color;
+            cursor: pointer;
             &:last-of-type {
                 margin-right: 0;
             }

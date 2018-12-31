@@ -1,7 +1,8 @@
 <template>
     <div class="shopSideBar">
         <el-col :span="24">
-            <el-menu default-active="/shopList"  text-color="#595757" background-color="rgba(239,239,239,1)" :router="true">
+            <!-- default-active="/shopList" -->
+            <el-menu text-color="#595757" background-color="rgba(239,239,239,1)" :router="true">
                 <el-menu-item index="0" disabled>
                     <span slot="title">商品管理</span>
                 </el-menu-item>
