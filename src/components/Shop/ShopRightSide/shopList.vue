@@ -53,7 +53,7 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                        </el-form>
+                    </el-form>
                 </div>               
             </el-col>
         </el-row>
@@ -420,6 +420,7 @@
                     margin: 7px;
                     color: @color;
                     text-decoration: underline;
+                    cursor: pointer;
                 }
                 .scope-table_text {
                     text-align: left;
