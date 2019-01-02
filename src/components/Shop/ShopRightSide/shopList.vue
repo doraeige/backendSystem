@@ -18,10 +18,10 @@
                         <i class="el-icon-arrow-up" v-show="isClick" @click="handleClickStatu">收起筛选</i>
                         <i class="el-icon-arrow-down" v-show="!isClick" @click="handleClickStatu">收起筛选</i>
                     </span>
-                    <el-radio-group size="small" class="right">
-                        <el-radio-button label="left">查询结果</el-radio-button>
-                        <el-radio-button label="right">高级检索</el-radio-button>
-                    </el-radio-group>
+                    <el-button-group class="right">
+                        <el-button size="small">查询结果</el-button>
+                        <el-button size="small">查询结果</el-button>
+                    </el-button-group>
                 </div>
                 <div class="inquireDiv" v-show="isClick">
                     <el-form :inline="true" :model="formInline" class="demo-form-inline">
@@ -105,7 +105,7 @@
                                 <el-table-column width="100" property="name" label="姓名"></el-table-column>
                                 <el-table-column width="300" property="address" label="地址"></el-table-column>
                             </el-table>
-                            <el-button slot="reference"><i class="iconfont icon-bianji"></i></el-button>
+                            <i slot="reference" class="iconfont icon-bianji"></i>
                         </el-popover>
                     </template>
                 </el-table-column>
@@ -327,9 +327,6 @@
     .shopList /deep/ .el-col-12 {
         width: 960px;
     }
-    .shopList /deep/ .el-button {
-        border: 0;
-    }
     .shopList /deep/ .el-input__inner {
         height: 28px;
         line-height: 28px;
@@ -396,7 +393,7 @@
                 .right {
                     position: absolute;
                     right: 8px;
-                    top: 3px;
+                    top: 3.2px;
                 }
             }
             .inquireDiv {
@@ -414,6 +411,7 @@
                 .icon-bianji {
                     color: @color;
                     font-weight: bold;
+                    cursor: pointer;
                 }
                 .scope-text {
                     display: inline-block;

@@ -9,10 +9,7 @@
                         <i class="el-icon-arrow-up" v-show="isClick" @click="handleClickStatu">收起筛选</i>
                         <i class="el-icon-arrow-down" v-show="!isClick" @click="handleClickStatu">收起筛选</i>
                     </span>
-                    <el-radio-group size="small" class="right">
-                        <el-radio-button label="left">查询结果</el-radio-button>
-                        <el-radio-button label="right">高级检索</el-radio-button>
-                    </el-radio-group>
+                    <el-button size="small" class="right">查询结果</el-button>
                 </div>
                 <div class="inquireDiv" v-show="isClick">
                     <el-form :inline="true" :model="formInline" class="demo-form-inline">
@@ -224,12 +221,12 @@
             background-color: #F7F8F8;
             .inquire {
                 position: absolute;
-                right: 200px;
+                right: 120px;
             }
             .right {
                 position: absolute;
-                right: 8px;
-                top: 3px;
+                right: 17px;
+                top: 3.2px;
             }
         }
         .inquireDiv {

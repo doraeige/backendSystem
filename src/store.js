@@ -17,6 +17,9 @@ export default new Vuex.Store({
     },
     hiddenLeftSide (state) {
       state.isCommentDetail = false
+    },
+    restoreLeftSide (state) {
+      state.isCommentDetail = true
     }
   },
   actions: {}
