@@ -53,7 +53,7 @@
             </el-menu>
         </el-header>
       <el-container>
-        <el-aside width="188px">
+        <el-aside width="188px" v-show="isCommentDetail">
             <HomeSideBar v-show="activeIndex == 1">
             </HomeSideBar>
             <ShopSideBar v-show="activeIndex == 2"></ShopSideBar>
@@ -95,6 +95,11 @@ export default {
             console.log(index,path)
             this.activeIndex = index
         },
+    },
+    computed: {
+        isCommentDetail() {
+            return this.$store.state.isCommentDetail
+        }
     }
 }
 </script>

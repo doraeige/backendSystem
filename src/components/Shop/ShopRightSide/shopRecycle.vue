@@ -209,7 +209,7 @@
 </script>
 
 <style scoped lang="less">
-@import '../../../assets/common.less';
+    @import '../../../assets/common.less';
     .shopRecycle /deep/ .el-col-12 {
         width: 900px;
     }

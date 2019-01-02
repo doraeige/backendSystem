@@ -6,13 +6,17 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     leftItem: '',
-    rightItem: ''
+    rightItem: '',
+    isCommentDetail: true
   },
   mutations: {
     changeItem (state, object) {
       state.leftItem = object.leftItem
       state.rightItem = object.rightItem
       console.log(state.leftItem, state.rightItem)
+    },
+    hiddenLeftSide (state) {
+      state.isCommentDetail = false
     }
   },
   actions: {}
