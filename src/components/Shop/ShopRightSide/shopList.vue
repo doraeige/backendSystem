@@ -456,7 +456,6 @@
                     margin-bottom: 7px;
                 }
             }
-        }
-        
+        }  
     }
 </style>

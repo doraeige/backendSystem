@@ -45,7 +45,7 @@
                     title: '商品评价'
                 }],
                 listTwo: [{
-                    path: '/shopSort',
+                    path: '/shopClassification',
                     title: '商品分类'
                 },{
                     path: '/shopType',
