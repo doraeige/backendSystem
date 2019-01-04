@@ -20,7 +20,7 @@
                     </span>
                     <el-button-group class="right">
                         <el-button size="small">查询结果</el-button>
-                        <el-button size="small">查询结果</el-button>
+                        <el-button size="small">高级检索</el-button>
                     </el-button-group>
                 </div>
                 <div class="inquireDiv" v-show="isClick">
