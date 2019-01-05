@@ -1,5 +1,5 @@
 <template>
-    <div class="shopSideBar">
+    <div class="productSideBar">
         <el-col :span="24">
             <!-- default-active="/shopList" -->
             <el-menu text-color="#595757" background-color="rgba(239,239,239,1)" :router="true">
@@ -28,27 +28,27 @@
 
 <script>
     export default {
-        name: 'shopSideBar',
+        name: 'productSideBar',
         data() {
             return {
                 list: [{
-                    path: '/shopList',
+                    path: '/productList',
                     title: '商品列表'
                 },{
-                    path: '/addShop',
+                    path: '/addProduct',
                     title: '添加商品'
                 },{
-                    path: '/shopRecycle',
+                    path: '/productRecycle',
                     title: '商品回收站'
                 },{
-                    path: '/shopComment',
+                    path: '/productComment',
                     title: '商品评价'
                 }],
                 listTwo: [{
-                    path: '/shopClassification',
+                    path: '/productClassification',
                     title: '商品分类'
                 },{
-                    path: '/shopType',
+                    path: '/productType',
                     title: '商品类型'
                 },{
                     path: '/brandManagement',
@@ -63,7 +63,7 @@
 </script>
 
 <style scoped lang="less">
-    .shopSideBar {
+    .productSideBar {
         .el-menu-item.is-disabled {
             cursor: default;
             color: #B9B9BA;

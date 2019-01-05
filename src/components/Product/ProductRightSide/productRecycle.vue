@@ -1,5 +1,5 @@
 <template>
-    <div class="shopComment">
+    <div class="productRecycle">
         <common-nav :title="title"></common-nav>
         <el-row class="common">
             <el-col :span="12">
@@ -55,30 +55,33 @@
                 border
                 :row-key="getRowKeys"
                 @selection-change="handleSelectionChange">
-                <el-table-column type="selection" :reserve-selection="true" width="40" align="center"></el-table-column>
-                <el-table-column prop="number" label="编号" width="85" align="center"></el-table-column>
-                <el-table-column prop="username" label="用户昵称" width="85" align="center"></el-table-column>
-                <el-table-column prop="productName" class-name="productname" label="商品名称" width="140" align="center"></el-table-column>
-                <el-table-column label="评价" width="115" align="center">
+                <el-table-column type="selection" :reserve-selection="true" width="55" align="center"></el-table-column>
+                <el-table-column prop="number" label="编号" width="100" align="center"></el-table-column>
+                <el-table-column label="商品图片" width="130" align="center">
                     <template slot-scope="scope">
-                        <el-rate v-model="scope.row.value1" disabled text-color="#ff9900">
-                        </el-rate>
+                        <img :src="scope.row.imgUrl" alt="商品图片" width="100" height="66" align="center">
                     </template>
                 </el-table-column>
-                <el-table-column prop="ip" label="IP地址" width="115" align="center"></el-table-column>
-                <el-table-column prop="time" label="评论时间" width="135" align="center"></el-table-column>
-                <el-table-column label="是否显示" width="80" align="center">
+                <el-table-column label="商品名称" width="150" align="center">
                     <template slot-scope="scope">
-                        <el-switch
-                            v-model="scope.row.value2"
-                            active-color="#13ce66"
-                            inactive-color="#ff4949">
-                        </el-switch>
+                        <p class="scope-table_text">{{ scope.row.shopName }}</p>
+                        <p class="scope-table_text">品牌：{{ scope.row.shopBrand }}</p>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="shopClassification" label="商品分类" width="120" align="center"></el-table-column>
+                <el-table-column label="价格" width="114" align="center">
+                    <template slot-scope="scope">
+                       ￥{{ scope.row.price }}
+                    </template>
+                </el-table-column>
+                <el-table-column label="货号" width="125" align="center">
+                    <template slot-scope="scope">
+                        No{{ scope.row.shopNum }}
                     </template>
                 </el-table-column>
                 <el-table-column label="操作" align="center">
                     <template slot-scope="scope">
-                        <span class="scope-text" @click="handleCheck">查看</span>
+                        <span class="scope-text">还原</span>
                         <span class="scope-text">删除</span>
                     </template>
                 </el-table-column>
@@ -100,13 +103,13 @@
 <script>
     import CommonNav from '../../common/CommonNav.vue'
     export default {
-        name: 'shopComment',
+        name: 'productRecycle',
         components: {
             CommonNav
         },
-       data(){
+        data(){
             return {
-                title: '商品评价',
+                title: '商品回收站',
                 isClick: false,
                 formInline: {
                     input: '',
@@ -162,7 +165,7 @@
             * 按钮点击事件
             * @param {boolean} isClick: 收起筛选点击与否
             */
-            handleClickStatu() {
+            handleClickStatu: function() {
                 this.isClick = !this.isClick
             },
             /**
@@ -188,48 +191,27 @@
                 console.log(cpage)
                 this.currentPage = cpage
             },
-            /**
-            * 按钮点击事件
-            * 点击 查看 跳转到评价详情页面
-            */
-            handleCheck() {
-                this.$router.push({ name: 'commentDetail'})
-            }
         },
         mounted() {
-            this.axios.get('/productcomment').then(res => {
+            this.axios.get('/recyclelist').then(res => {
+                // console.log(res.data)
                 if(res.data.error_code == 0){
                     this.tableData = res.data.data.tableData
                 }
             }).catch(err => {
                 console.log(err)
             })
-        },
-        created() {
-            this.$store.commit('restoreLeftSide')
         }
     }
 </script>
 
 <style scoped lang="less">
     @import '../../../assets/common.less';
-    .shopComment /deep/ .el-col-12 {
+    .productRecycle /deep/ .el-col-12 {
         width: 900px;
     }
-    .shopComment /deep/ .el-input__inner {
+    .productRecycle /deep/ .el-input__inner {
         margin-top: -3px;
-    }
-    .shopComment /deep/ .el-table .cell, .el-table th div, .el-table--border td:first-child .cell, .el-table--border th:first-child .cell {
-        padding-left: 5px;
-    }
-    .shopComment /deep/ .el-table .cell, .el-table th div {
-        padding-right: 5px;
-    }
-    .shopComment /deep/ .el-rate__icon {
-        margin-right: 2px;
-    }
-    .shopComment /deep/ .el-table .cell {
-        white-space: nowrap;
     }
     .common {
         padding-left: calc((100% - 900px) / 2);
@@ -259,19 +241,15 @@
             .scope-status {
                 color: @color;
             }
-            .productname.cell {
-                white-space: nowrap;
-            }
             .icon-bianji {
                 color: @color;
                 font-weight: bold;
             }
             .scope-text {
                 display: inline-block;
-                margin: 5px;
+                margin: 7px;
                 color: @color;
                 cursor: pointer;
-                text-decoration: underline;
             }
             .scope-table_text {
                 text-align: left;

@@ -1,5 +1,5 @@
 <template>
-    <div class="addShop">
+    <div class="addProduct">
         <common-nav :title="title"></common-nav>
         <div class="wrapper">
             <el-row>
@@ -33,7 +33,7 @@
 <script>
     import CommonNav from '../../common/CommonNav.vue'
     export default {
-        name: 'addShop',
+        name: 'addProduct',
         components: {
             CommonNav
         },
@@ -84,7 +84,7 @@
 
 <style scoped lang="less">
     @import '../../../assets/common.less';
-    .addShop /deep/ .el-step__icon {
+    .addProduct /deep/ .el-step__icon {
         width: @margin-top * 2.2;
         height: @margin-top * 2.2;
         font-size: @margin-top * 1.4;
@@ -93,16 +93,16 @@
         border-color: @color;
         margin-top: 23px;
     }
-    .addShop /deep/ .el-step.is-horizontal .el-step__line {
+    .addProduct /deep/ .el-step.is-horizontal .el-step__line {
         top: 43px;
     }
-    .addShop /deep/ .el-step__title.is-process {
+    .addProduct /deep/ .el-step__title.is-process {
         color: @color;
     }
-    .addShop /deep/ .el-step__title.is-success {
+    .addProduct /deep/ .el-step__title.is-success {
         color: @color;
     }
-    .addShop /deep/ .el-step__head.is-success {
+    .addProduct /deep/ .el-step__head.is-success {
         color: @color;
         border-color: @color;
     }

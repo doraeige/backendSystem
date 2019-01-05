@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login.vue'
 import systemIndex from './components/Home/HomeRightSide/systemIndex.vue'
-import step0 from './components/Shop/ShopRightSide/addShopComponents/step0.vue'
-import step1 from './components/Shop/ShopRightSide/addShopComponents/step1.vue'
-import step2 from './components/Shop/ShopRightSide/addShopComponents/step2.vue'
+import step0 from './components/Product/ProductRightSide/addProductComponents/step0.vue'
+import step1 from './components/Product/ProductRightSide/addProductComponents/step1.vue'
+import step2 from './components/Product/ProductRightSide/addProductComponents/step2.vue'
 
 Vue.use(Router)
 
@@ -42,62 +42,70 @@ export default new Router({
         name: 'loginLog',
         component: () => import('./components/Home/HomeRightSide/loginLog.vue')
       }, {
-        path: '/shopList',
-        name: 'shopList',
-        component: () => import('./components/Shop/ShopRightSide/shopList.vue')
+        path: '/productList',
+        name: 'productList',
+        component: () => import('./components/Product/ProductRightSide/productList.vue')
       }, {
-        path: '/addShop',
-        name: 'addShop',
-        component: () => import('./components/Shop/ShopRightSide/addShop.vue'),
+        path: '/addProduct',
+        name: 'addProduct',
+        component: () => import('./components/Product/ProductRightSide/addProduct.vue'),
         children: [
-          // 路径为'/addShop'，使用组件step0
+          // 路径为'/addProduct'，使用组件step0
           {
             path: '',
             component: step0
           },
-          // 路径为'/addShopComponents/step0'，使用组件step0
+          // 路径为'/addProductComponents/step0'，使用组件step0
           {
             path: 'step0',
             component: step0
           },
-          // 路径为'/addShopComponents/step1'，使用组件step1
+          // 路径为'/addProductComponents/step1'，使用组件step1
           {
             path: 'step1',
             component: step1
           }, {
-            // 路径为'/addShopComponents/step2'，使用组件step2
+            // 路径为'/addProductComponents/step2'，使用组件step2
             path: 'step2',
             component: step2
           }
         ]
       }, {
-        path: '/shopRecycle',
-        name: 'shopRecycle',
-        component: () => import('./components/Shop/ShopRightSide/shopRecycle.vue')
+        path: '/productRecycle',
+        name: 'productRecycle',
+        component: () => import('./components/Product/ProductRightSide/productRecycle.vue')
       }, {
-        path: '/shopComment',
-        name: 'shopComment',
-        component: () => import('./components/Shop/ShopRightSide/shopComment.vue')
+        path: '/productComment',
+        name: 'productComment',
+        component: () => import('./components/Product/ProductRightSide/productComment.vue')
       }, {
         path: '/commentDetail',
         name: 'commentDetail',
-        component: () => import('./components/Shop/commentDetail.vue')
+        component: () => import('./components/Product/commentDetail.vue')
       }, {
-        path: '/shopClassification',
-        name: 'shopClassification',
-        component: () => import('./components/Shop/ShopRightSide/shopClassification.vue')
+        path: '/productClassification',
+        name: 'productClassification',
+        component: () => import('./components/Product/ProductRightSide/productClassification.vue')
       }, {
-        path: '/shopType',
-        name: 'shopType',
-        component: () => import('./components/Shop/ShopRightSide/shopType.vue')
+        path: '/addClassification',
+        name: 'addClassification',
+        component: () => import('./components/Product/ProductRightSide/addClassification.vue')
+      }, {
+        path: '/secondClassification',
+        name: 'secondClassification',
+        component: () => import('./components/Product/ProductRightSide/secondClassification.vue')
+      }, {
+        path: '/productType',
+        name: 'productType',
+        component: () => import('./components/Product/ProductRightSide/productType.vue')
       }, {
         path: '/brandManagement',
         name: 'brandManagement',
-        component: () => import('./components/Shop/ShopRightSide/brandManagement.vue')
+        component: () => import('./components/Product/ProductRightSide/brandManagement.vue')
       }, {
         path: '/libraryManagement',
         name: 'libraryManagement',
-        component: () => import('./components/Shop/ShopRightSide/libraryManagement.vue')
+        component: () => import('./components/Product/ProductRightSide/libraryManagement.vue')
       }
     ]
   }]

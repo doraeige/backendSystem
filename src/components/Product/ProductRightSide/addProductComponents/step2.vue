@@ -18,13 +18,13 @@
                             <div>尺码</div>
                         </el-col>
                         <el-checkbox-group v-model="attributesForm.size">
-                            <el-checkbox v-for="item in attributesForm.sizes" :label="item"></el-checkbox>
+                            <el-checkbox v-for="(item,index) in attributesForm.sizes" :key="index" :label="item"></el-checkbox>
                         </el-checkbox-group>
                         <el-col :span="24">
                             <div>颜色</div>
                         </el-col>
                         <el-checkbox-group v-model="attributesForm.color">
-                            <el-checkbox v-for="(item,index) in attributesForm.colors" :label="item">
+                            <el-checkbox v-for="(item,index) in attributesForm.colors" :key="index" :label="item">
                                 {{item}}
                                 <span class="color-text" @click="deleteColor(index)">删除</span>
                             </el-checkbox>

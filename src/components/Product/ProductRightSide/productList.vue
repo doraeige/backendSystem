@@ -1,5 +1,5 @@
 <template>
-    <div class="shopList" v-cloak>
+    <div class="productList" v-cloak>
         <common-nav :title="title"></common-nav>
         <el-row>
             <el-col  class="shopStatus common">
@@ -150,9 +150,8 @@
 <script>
     import CommonNav from '../../common/CommonNav.vue'
     export default {
-        name: 'shopList',
+        name: 'productList',
         components: {CommonNav},
-        // inject: ['reload'],
         data(){
             return {
                 gridData: [{
@@ -324,54 +323,54 @@
 
 <style scoped lang="less">
     @import '../../../assets/common.less';
-    .shopList /deep/ .el-col-12 {
+    .productList /deep/ .el-col-12 {
         width: 960px;
     }
-    .shopList /deep/ .el-input__inner {
+    .productList /deep/ .el-input__inner {
         height: 28px;
         line-height: 28px;
     }
-    .shopList /deep/ .el-input__icon {
+    .productList /deep/ .el-input__icon {
         line-height: 0;
     }
-    .shopList /deep/ .el-table .cell {
+    .productList /deep/ .el-table .cell {
         padding-left: 5px;
         padding-right: 5px;
         text-align: center;
     }
-    .shopList /deep/ .el-button--mini {
+    .productList /deep/ .el-button--mini {
         padding: 7px 8px;
         margin-top: 6px;
         margin-left: 5px;
     }
-    .shopList /deep/ .el-pagination .el-select .el-input .el-input__inner {
+    .productList /deep/ .el-pagination .el-select .el-input .el-input__inner {
         margin-top: -3px;
     }
-    .shopList /deep/ .el-pagination__total {
+    .productList /deep/ .el-pagination__total {
         margin-right: 2px;
     }
-    .shopList /deep/ .el-pagination__sizes {
+    .productList /deep/ .el-pagination__sizes {
         margin-right: 0;
     }
-    .shopList /deep/ .el-pagination.is-background .el-pager li {
+    .productList /deep/ .el-pagination.is-background .el-pager li {
         margin: 0 2px;
     }
-    .shopList /deep/ .el-pagination.is-background .btn-next {
+    .productList /deep/ .el-pagination.is-background .btn-next {
         margin: 0 2px;
     }
-    .shopList /deep/ .el-pagination.is-background .btn-pre {
+    .productList /deep/ .el-pagination.is-background .btn-pre {
         margin: 0 2px;
     }
-    .shopList /deep/ .el-pagination__jump {
+    .productList /deep/ .el-pagination__jump {
         margin-left: 0;
     }
-    .shopList /deep/ .el-pagination__editor.el-input {
+    .productList /deep/ .el-pagination__editor.el-input {
         width: 40px;
     }
-    .shopList /deep/ .el-table td, .el-table th {
+    .productList /deep/ .el-table td, .el-table th {
         padding: 6px 0;
     }
-    .shopList {
+    .productList {
         .shopStatus {
             margin-top: @margin-top;
             margin-bottom: @margin-top;

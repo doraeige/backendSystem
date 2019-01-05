@@ -56,7 +56,7 @@
         <el-aside width="188px" v-show="isCommentDetail">
             <HomeSideBar v-show="activeIndex == 1">
             </HomeSideBar>
-            <ShopSideBar v-show="activeIndex == 2"></ShopSideBar>
+            <ProductSideBar v-show="activeIndex == 2"></ProductSideBar>
         </el-aside>
         <el-main>
             <router-view></router-view>
@@ -69,13 +69,13 @@
 <script>
 // @ is an alias to /src
 import HomeSideBar from '@/components/Home/HomeSideBar.vue'
-import ShopSideBar from '@/components/Shop/ShopSideBar.vue'
+import ProductSideBar from '@/components/Product/ProductSideBar.vue'
 
 export default {
     name: "home",
     components: {
        HomeSideBar,
-       ShopSideBar
+       ProductSideBar
     },
     data () {
         return {

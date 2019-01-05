@@ -1,5 +1,5 @@
 <template>
-    <div class="shopType">
+    <div class="productType">
         <common-nav :title="title"></common-nav>
     </div>
 </template>
@@ -7,7 +7,7 @@
 <script>
     import CommonNav from '../../common/CommonNav.vue'
     export default {
-        name: 'shopType',
+        name: 'productType',
         components: {
             CommonNav
         },

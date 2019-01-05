@@ -86,11 +86,10 @@
         },
         methods: {
             toCommentPage() {
-                this.$router.push({ name: 'shopComment'})
+                this.$router.push({ name: 'productComment'})
             },
             refresh() {
                 this.reload()
-                // this.$router.go(0)
             },
             onSubmit() {
                 console.log('sss')

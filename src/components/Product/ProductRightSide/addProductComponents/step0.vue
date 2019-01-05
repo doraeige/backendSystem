@@ -1,5 +1,5 @@
 <template>
-    <div class="step1">
+    <div class="step0">
         <el-col :span="12">
             <i class="iconfont icon-xiangyouzhishipaitianchongban"></i>
             <p class="icon-text">基本信息</p>
@@ -51,7 +51,7 @@
 
 <script>
     export default {
-        name: 'step1',
+        name: 'step0',
         data(){        
             return {
                 value: '',

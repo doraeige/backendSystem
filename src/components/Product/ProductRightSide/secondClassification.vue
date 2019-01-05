@@ -1,12 +1,11 @@
 <template>
-    <div class="shopClassification">
-        <common-nav :title="title"></common-nav>
-         <el-row class="common">
+    <div class="secondClassification">
+        <common-nav :title="title" :show="show"></common-nav>
+        <el-row class="common">
             <el-col :span="22" class="list-header">
                 <div class="grid-content bg-purple">数据列表</div>
             </el-col>
             <el-table
-                ref="multipleTable"
                 :data="tableData.slice((currentPage - 1) * pagesize,currentPage * pagesize)"
                 border>
                 <el-table-column prop="number" label="编号" width="90"></el-table-column>
@@ -33,13 +32,15 @@
                 <el-table-column prop="value3" label="排序" width="62"></el-table-column>
                 <el-table-column label="设置" width="185">
                     <template slot-scope="scope">
-                        <span v-for="(item, index) in scope.row.setting" :key="index" class="scope-text">{{item}}</span>
+                        <span class="scope-text" @click="addSubordinate">新增下级</span>
+                        <span class="scope-text" @click="viewSubordinate">查看下级</span>
+                        <span class="scope-text">转移商品</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
                         <span class="scope-text">编辑</span>
-                        <span class="scope-text danger">删除</span>
+                        <span class="scope-text danger" @click="deleteIndex(scope.$index,scope.row)">删除</span>
                     </template>
                 </el-table-column>
             </el-table>
@@ -60,16 +61,17 @@
 <script>
     import CommonNav from '../../common/CommonNav.vue'
     export default {
-        name: 'shopClassification',
+        name: 'secondClassification',
         components: {
             CommonNav
         },
         data(){
             return {
-                title: '商品分类',
+                title: '二级分类',
+                show: true,
                 tableData: [],
                 currentPage: 1,
-                pagesize: 10,
+                pagesize: 10
             }
         },
         methods: {
@@ -89,9 +91,19 @@
                 console.log(cpage)
                 this.currentPage = cpage
             },
+            addSubordinate() {
+                this.$router.push({ name: 'addClassification'})
+            },
+            viewSubordinate(){
+                this.$router.push({ name: 'secondClassification'})
+            },
+            deleteIndex(index, row) {
+                console.log(index,row)
+                this.tableData.splice(index,1)
+            }
         },
         mounted() {
-            this.axios.get('/classification').then(res => {
+            this.axios.get('/secondClassification').then(res => {
                 console.log(res.data)
                 if(res.data.error_code == 0){
                     this.tableData = res.data.data.tableData
@@ -105,12 +117,12 @@
 
 <style scoped lang="less">
     @import '../../../assets/common.less';
-    .shopClassification /deep/ .el-table .cell {
+    .secondClassification /deep/ .el-table .cell {
         padding-left: 5px;
         padding-right: 5px;
         text-align: center;
     }
-    .shopClassification /deep/ .el-pagination .el-select .el-input .el-input__inner {
+    .secondClassification /deep/ .el-pagination .el-select .el-input .el-input__inner {
         margin-top: -3px;
     }
     .common {
@@ -119,15 +131,6 @@
             position: relative;
             border: @border;
             background-color: #F7F8F8;
-            .inquire {
-                position: absolute;
-                right: 200px;
-            }
-            .right {
-                position: absolute;
-                right: 8px;
-                top: 3.2px;
-            }
         }
         .inquireDiv {
             height: 40px;
@@ -151,6 +154,9 @@
                 margin: 4px;
                 color: @color;
                 cursor: pointer;
+                &:hover {
+                    text-decoration: underline;
+                }
             }
             .scope-table_text {
                 text-align: left;

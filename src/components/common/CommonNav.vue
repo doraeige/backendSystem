@@ -2,7 +2,10 @@
     <div class="CommonNav">
         <el-col :span="24">
             <span class="title">{{title}}</span>
-            <el-button class="right-side" icon="el-icon-refresh" size="small" @click="refresh">刷新</el-button>
+            <div class="right-side">
+                <el-button v-show="show" icon="el-icon-back" size="small" @click="goBack">返回</el-button>
+                <el-button icon="el-icon-refresh" size="small" @click="refresh">刷新</el-button>
+            </div>
         </el-col>
     </div>
 </template>
@@ -11,13 +14,17 @@
     export default {
         name: 'CommonNav',
         props: {
-            title: String
+            title: String,
+            show: Boolean
         },
         inject: ['reload'], // 页面刷新
         methods: {
+            goBack () {
+                this.$router.go(-1)
+            },
             refresh() {
                 this.reload()
-            },
+            }
         }
     }
 </script>
@@ -52,8 +59,9 @@
             }
             .right-side {
                 position: absolute;
-                top: 3px;
+                top: 0;
                 right: 10px;
+                line-height: 35px;
             }
         }
     }   
