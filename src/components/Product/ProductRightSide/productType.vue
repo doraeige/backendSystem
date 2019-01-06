@@ -20,11 +20,12 @@
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
-                        <span class="scope-text">编辑</span>
+                        <span class="scope-text" @click="dialogFormVisible = true">编辑</span>
                         <span class="scope-text danger" @click="deleteIndex(scope.$index,scope.row)">删除</span>
                     </template>
                 </el-table-column>
             </el-table>
+            <!-- 分页 -->
             <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
@@ -35,6 +36,19 @@
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="tableData.length">    
             </el-pagination>
+
+            <!-- 弹窗 -->
+            <el-dialog title="添加类型" :visible.sync="dialogFormVisible" width="540px">
+                <el-form :model="dialogform">
+                    <el-form-item label="类型名称" required :label-width="formLabelWidth">
+                        <el-input v-model="dialogform.name"></el-input>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogFormVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                </div>
+            </el-dialog>
         </el-row>
     </div>
 </template>
@@ -51,7 +65,12 @@
                 title: '商品类型',
                 tableData: [],
                 currentPage: 1,
-                pagesize: 10
+                pagesize: 10,
+                dialogFormVisible: false,
+                formLabelWidth: '150px',
+                dialogform: {
+                    name: ''
+                }
             }
         },
         methods: {
@@ -115,6 +134,17 @@
     }
     .productType /deep/ .el-pagination .el-select .el-input .el-input__inner {
         margin-top: -3px;
+    }
+    .productType /deep/ .el-input__inner {
+        width: 80%;
+    }
+    .productType /deep/ .el-button--primary {
+        background-color: @color;
+        border-color: @color;
+    }
+    .productType /deep/ .el-button--primary:focus, .el-button--primary:hover {
+        background-color: rgba(91,192,191,0.9);
+        border-color: rgba(91,192,191,0.9);
     }
    .common {
         padding-left: calc((100% - 924px) / 2);
