@@ -57,7 +57,7 @@
                 this.goStep(this.step)
             },
             handleNextStep() {
-                this.$router.push('/addShop/step' + (this.step + 1))
+                this.$router.push('/goods/addProduct/step' + (this.step + 1))
                 setTimeout(() => {
                     if (this.isRouter) {
                         this.step ++
@@ -106,24 +106,27 @@
         color: @color;
         border-color: @color;
     }
-    .wrapper {
-        width: 900px;
-        margin: 0 auto;  
-        box-sizing: border-box;
-        .btnDiv {
-            .flex;
-        }
-        .btn {
-            width: 176px;
-            text-align: center;
-            margin-top: @margin-top;
-            background-color: @color;
-            border-color: @color;
-            color: #fff;
-        }
-        .prestep {
-            background-color: #fff;
-            color: @color;
+    .addProduct {
+        .wrapper {
+            width: 900px;
+            margin: 0 auto;  
+            box-sizing: border-box;
+            .btnDiv {
+                .flex;
+            }
+            .btn {
+                width: 176px;
+                text-align: center;
+                margin-top: @margin-top;
+                background-color: @color;
+                border-color: @color;
+                color: #fff;
+            }
+            .prestep {
+                background-color: #fff;
+                color: @color;
+            }
         }
     }
+   
 </style>

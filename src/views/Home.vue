@@ -2,19 +2,21 @@
   <div class="home">
     <el-container>
         <el-header>
+            <!-- :default-active="activeIndex" -->
             <el-menu
-                :default-active="activeIndex"
+                :default-active="activeIndex"       
                 mode="horizontal"
                 @select="handleSelect"
                 background-color="#5BC0BF"
                 text-color="rgba(255,255,255,0.8)"
-                active-text-color="rgba(255,255,255,0.9)">
+                active-text-color="rgba(255,255,255,0.9)"
+                router>
                 <el-menu-item index="0" disabled>LOGO</el-menu-item>
-                <el-menu-item index="1">首页</el-menu-item>
-                <el-menu-item index="2">商品</el-menu-item>
-                <el-menu-item index="3">订单</el-menu-item>
+                <el-menu-item index="/index">首页</el-menu-item>
+                <el-menu-item index="/goods">商品</el-menu-item>
+                <el-menu-item index="/order">订单</el-menu-item>
                 <el-menu-item index="4">库存</el-menu-item>
-                <el-menu-item index="5">用户</el-menu-item>
+                <el-menu-item index="/user">用户</el-menu-item>
                 <el-menu-item index="6">促销</el-menu-item>
                 <el-menu-item index="7">运营</el-menu-item>
                 <el-menu-item index="8">统计</el-menu-item>
@@ -52,35 +54,19 @@
                 </el-menu-item>
             </el-menu>
         </el-header>
-      <el-container>
-        <el-aside width="188px" v-show="isCommentDetail">
-            <HomeSideBar v-show="activeIndex == 1">
-            </HomeSideBar>
-            <ProductSideBar v-show="activeIndex == 2"></ProductSideBar>
-        </el-aside>
-        <el-main>
-            <router-view></router-view>
-        </el-main>
+      <el-container class="main">
+          <router-view></router-view>
       </el-container>
     </el-container>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HomeSideBar from '@/components/Home/HomeSideBar.vue'
-import ProductSideBar from '@/components/Product/ProductSideBar.vue'
-
 export default {
     name: "home",
-    components: {
-       HomeSideBar,
-       ProductSideBar
-    },
     data () {
         return {
-            activeIndex: '1',
-            index: '',
+            activeIndex: '/index',
             notice: 20,
             list: [
                 {order :'待付款订单', num: 10},
@@ -105,8 +91,8 @@ export default {
 </script>
 
 <style <style lang="less" scoped>
+    @import '../assets/common.less';
     @color: #fff;
-    @font-family: MicrosoftYaHei;
     .home /deep/ .el-header {
         padding: 0;
     }
@@ -129,11 +115,12 @@ export default {
     }
     .home {
         width: 1280px;
-        height: 100vh;
+        height: 100%;
         font-size: 14px;
         .el-header{
             width: 100%;
             color: @color;
+            height: 60px;
             .el-menu--horizontal>.el-menu-item {
                 border-bottom: 0;
                 box-sizing: border-box;
@@ -168,23 +155,9 @@ export default {
                 margin-left: 60px;
             }
         }
-        .el-aside {
-            width: 14.5%;
-            font-family: @font-family;
+        .main {
+            width: 1280px;
             height: 100%;
-            background-color: rgba(239,239,239,1);
-            color: rgba(89,87,87,1);
-            border: 1px solid #ebeef5;
-        }
-    
-        .el-main {
-            width: 85.5%;
-            height: 100%;
-            background-color: @color;
-            font-family: @font-family;
-            padding: 0;
-            margin-bottom: 20px;
-            box-sizing: border-box;
         }
     }
 </style>

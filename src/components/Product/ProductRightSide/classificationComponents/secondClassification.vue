@@ -39,7 +39,7 @@
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
-                        <span class="scope-text">编辑</span>
+                        <span class="scope-text" @click="addSubordinate">编辑</span>
                         <span class="scope-text danger" @click="deleteIndex(scope.$index,scope.row)">删除</span>
                     </template>
                 </el-table-column>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-    import CommonNav from '../../common/CommonNav.vue'
+    import CommonNav from '../../../common/CommonNav.vue'
     export default {
         name: 'secondClassification',
         components: {
@@ -116,7 +116,7 @@
 </script>
 
 <style scoped lang="less">
-    @import '../../../assets/common.less';
+    @import '../../../../assets/common.less';
     .secondClassification /deep/ .el-table .cell {
         padding-left: 5px;
         padding-right: 5px;

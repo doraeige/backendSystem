@@ -116,7 +116,7 @@
 </template>
 
 <script>
-    import CommonNav from '../../common/CommonNav.vue'
+    import CommonNav from '../../../common/CommonNav.vue'
     export default {
         name: 'addClassification',
         components: {
@@ -170,14 +170,14 @@
         },
         methods: {
             onSubmit() {
-                console.log('submit!');
+                console.log('submit!')
             }
         }
     }
 </script>
 
 <style scoped lang="less">
-    @import '../../../assets/common.less';
+    @import '../../../../assets/common.less';
     .addClassification /deep/ .el-textarea__inner {
         height: 175px;
     }
