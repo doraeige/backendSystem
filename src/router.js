@@ -26,8 +26,7 @@ export default new Router({
         {
           path: '',
           component: () => import('./components/Home/HomeSideBar.vue')
-        },
-        {
+        }, {
           path: '/index',
           name: '首页',
           component: () => import('./components/Home/HomeSideBar.vue'),
@@ -51,7 +50,11 @@ export default new Router({
             }
           ]
         },
-        {
+        { // 评价详情
+          path: '/commentDetail',
+          name: 'commentDetail',
+          component: () => import('./components/Product/commentDetail.vue')
+        }, {
           path: '/goods',
           name: '商品',
           component: () => import('./components/Product/ProductSideBar.vue'),
@@ -92,54 +95,39 @@ export default new Router({
             }, { // 商品评价
               path: '/goods/productComment',
               name: 'productComment',
-              component: () => import('./components/Product/ProductRightSide/productComment.vue'),
-              children: [
-                { // 评价详情
-                  path: '/commentDetail',
-                  name: 'commentDetail',
-                  component: () => import('./components/Product/commentDetail.vue')
-                }
-              ]
+              component: () => import('./components/Product/ProductRightSide/productComment.vue')
             }, {
               path: '/goods/productClassification',
               name: '商品分类',
-              component: () => import('./components/Product/ProductRightSide/productClassification.vue'),
-              children: [
-                {
-                  path: '/goods/productClassification/addClassification',
-                  name: '添加分类',
-                  component: () => import('./components/Product/ProductRightSide/classificationComponents/addClassification.vue')
-                }, {
-                  path: '/goods/productClassification/secondClassification',
-                  name: '二级分类',
-                  component: () => import('./components/Product/ProductRightSide/classificationComponents/secondClassification.vue')
-                }
-              ]
+              component: () => import('./components/Product/ProductRightSide/productClassification.vue')
+            }, { // 添加分类
+              path: '/goods/productClassification/addClassification',
+              name: 'addClassification',
+              component: () => import('./components/Product/ProductRightSide/classificationComponents/addClassification.vue')
+            }, { // 二级分类
+              path: '/goods/productClassification/secondClassification',
+              name: 'secondClassification',
+              component: () => import('./components/Product/ProductRightSide/classificationComponents/secondClassification.vue')
             }, {
               path: '/goods/productType',
               name: '商品类型',
-              component: () => import('./components/Product/ProductRightSide/productType.vue'),
-              children: [
-                // 添加属性
-                {
-                  path: '/goods/productType/addAttributes',
-                  component: () => import('./components/Product/ProductRightSide/productTypeComponents/addAttributes.vue')
-                },
-                // 添加参数
-                {
-                  path: '/goods/productType/addParameter',
-                  component: () => import('./components/Product/ProductRightSide/productTypeComponents/addParameter.vue')
-                },
-                // 属性列表
-                {
-                  path: '/goods/productType/attributesList',
-                  component: () => import('./components/Product/ProductRightSide/productTypeComponents/attributesList.vue')
-                }, {
-                  // 参数列表
-                  path: '/goods/productType/parameterList',
-                  component: () => import('./components/Product/ProductRightSide/productTypeComponents/parameterList.vue')
-                }
-              ]
+              component: () => import('./components/Product/ProductRightSide/productType.vue')
+            }, { // 添加属性
+              path: '/goods/productType/addAttributes',
+              name: 'addAttributes',
+              component: () => import('./components/Product/ProductRightSide/productTypeComponents/addAttributes.vue')
+            }, { // 添加参数
+              path: '/goods/productType/addParameter',
+              name: 'addParameter',
+              component: () => import('./components/Product/ProductRightSide/productTypeComponents/addParameter.vue')
+            }, { // 属性列表
+              path: '/goods/productType/attributesList',
+              name: 'attributesList',
+              component: () => import('./components/Product/ProductRightSide/productTypeComponents/attributesList.vue')
+            }, { // 参数列表
+              path: '/goods/productType/parameterList',
+              name: 'parameterList',
+              component: () => import('./components/Product/ProductRightSide/productTypeComponents/parameterList.vue')
             }, {
               path: '/goods/brandManagement',
               name: '品牌管理',

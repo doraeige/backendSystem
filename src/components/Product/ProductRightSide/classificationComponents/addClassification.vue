@@ -20,7 +20,7 @@
                             <el-option label="居家" value="居家"></el-option>
                             <el-option label="洗护" value="洗护"></el-option>
                         </el-select>
-                        <p>不选择分类默认为顶级分类</p>
+                        <p class="select-text">不选择分类默认为顶级分类</p>
                     </el-form-item>
                     <el-form-item label="数量单位">
                         <el-col :span="9">
@@ -181,6 +181,22 @@
     .addClassification /deep/ .el-textarea__inner {
         height: 175px;
     }
+    .addClassification /deep/ .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+        border-color: @color;
+        background-color: @color;
+    }
+    .addClassification /deep/ .el-radio__input.is-checked .el-radio__inner {
+        border-color: @color;
+        background-color: #fff;
+    }
+    .addClassification /deep/ .el-radio__input.is-checked+.el-radio__label {
+        color: @color;
+    }
+    .addClassification /deep/ .el-radio__inner::after {
+        width: 8px;
+        height: 8px;
+        background-color: @color;
+    }
     .common {
         margin-top: 20px;
         padding-left: calc((100% - 924px) / 2);
@@ -195,6 +211,10 @@
             padding: 50px 0 10px 200px;
             .sub-headings {
                 width: 224px;
+            }
+            .select-text {
+                font-size: 12px;
+                color: #9FA0A0;
             }
             .el-button--primary {
                 border-color: @color;

@@ -14,8 +14,8 @@
                 <el-table-column prop="argumentsCount" label="参数数量" width="220"></el-table-column>
                 <el-table-column label="设置" width="180">
                     <template slot-scope="scope">
-                        <span class="scope-text" @click="">属性列表</span>
-                        <span class="scope-text" @click="">参数列表</span>
+                        <span class="scope-text" @click="openAttributeList">属性列表</span>
+                        <span class="scope-text" @click="openParameterList">参数列表</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
@@ -71,6 +71,23 @@
                 console.log(cpage)
                 this.currentPage = cpage
             },
+            /**
+            * 按钮点击事件 跳转到 属性列表 页面
+            */
+            openAttributeList(){
+                this.$router.push({ name: 'attributesList'})
+            },
+            /**
+            * 按钮点击事件 跳转到 参数列表 页面
+            */
+            openParameterList() {
+                this.$router.push({ name: 'parameterList'})
+            },
+            /**
+            * 删除按钮点击事件
+            * @param {number} index: 当前行数
+            * @param {object} row: 删除按钮对应的数据
+            */
             deleteIndex(index, row) {
                 console.log(index,row)
                 this.tableData.splice(index,1)
@@ -105,12 +122,6 @@
             position: relative;
             border: @border;
             background-color: #F7F8F8;
-        }
-        .inquireDiv {
-            height: 40px;
-            line-height: 40px;
-            border: @border;
-            font-size: 12px;
         }
         .el-table {
             width: 924px;

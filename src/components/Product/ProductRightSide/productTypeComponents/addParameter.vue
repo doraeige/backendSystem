@@ -13,7 +13,7 @@
         },
         data(){
             return {
-                title: '属性列表',
+                title: '添加参数',
                 show: true,
                 tableData: [],
                 currentPage: 1,

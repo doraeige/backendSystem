@@ -2,9 +2,8 @@
   <div class="home">
     <el-container>
         <el-header>
-            <!-- :default-active="activeIndex" -->
             <el-menu
-                :default-active="activeIndex"       
+                :default-active="this.$route.path"       
                 mode="horizontal"
                 @select="handleSelect"
                 background-color="#5BC0BF"
@@ -161,4 +160,3 @@ export default {
         }
     }
 </style>
-

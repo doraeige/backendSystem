@@ -261,6 +261,10 @@
             handleSelectionChange(val) {
                 this.multipleSelection = val
             },
+            /**
+            * 全选 按钮点击事件
+            * 所有数据被选中
+            */
             handleCheckAllChange() {
                 if ( this.checkAll ) {
                     this.tableData.forEach(row => {
