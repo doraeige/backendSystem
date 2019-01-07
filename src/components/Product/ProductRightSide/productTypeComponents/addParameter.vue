@@ -28,7 +28,7 @@
                             <el-radio label="范围检索"></el-radio>
                         </el-radio-group>
                         <el-col :span="20">
-                             <p class="tip">不需要该属性成为检索商品条件的情况请选择不需要检索，需要该属性进行关键字检索商品时选择关键字检索，如果该属性检索时希望是指定某个范围时，选择范围检索。</p> 
+                             <p class="el-upload__tip">不需要该属性成为检索商品条件的情况请选择不需要检索，需要该属性进行关键字检索商品时选择关键字检索，如果该属性检索时希望是指定某个范围时，选择范围检索。</p> 
                         </el-col>
                     </el-form-item>
                     <el-form-item label="相同参数值的商品是否关联">
@@ -121,6 +121,11 @@
     .addParameter /deep/ .el-checkbox__input.is-checked+.el-checkbox__label {
         color: @color;
     }
+    .addParameter /deep/ .el-upload__tip {
+        margin-top: 0;
+        line-height: 20px;
+        color: #9FA0A0;
+    }
     .common {
         margin-top: 20px;
         padding-left: calc((100% - 924px) / 2);
@@ -142,11 +147,6 @@
                 &:hover {
                     background-color: rgba(91,192,191,0.9);
                 }
-            }
-            .tip {
-                font-size: 12px;
-                color: #9FA0A0;
-                line-height: 20px;
             }
         }
     }

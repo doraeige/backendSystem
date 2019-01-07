@@ -71,8 +71,7 @@
                     <template slot-scope="scope">
                         <el-switch
                             v-model="scope.row.value2"
-                            active-color="#13ce66"
-                            inactive-color="#ff4949">
+                            active-color="#13ce66">
                         </el-switch>
                     </template>
                 </el-table-column>

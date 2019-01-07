@@ -22,14 +22,13 @@ export default new Router({
       path: '/',
       name: '主页',
       component: () => import('./views/Home.vue'),
+      redirect: '/index',
       children: [
         {
-          path: '',
-          component: () => import('./components/Home/HomeSideBar.vue')
-        }, {
           path: '/index',
           name: '首页',
           component: () => import('./components/Home/HomeSideBar.vue'),
+          redirect: '/index/systemIndex',
           children: [
             {
               path: '/index/systemIndex',
@@ -63,9 +62,8 @@ export default new Router({
               path: '/goods/productList',
               name: '商品列表',
               component: () => import('./components/Product/ProductRightSide/productList.vue')
-            }, {
+            }, { // 添加商品
               path: '/goods/addProduct',
-              name: '添加商品',
               component: () => import('./components/Product/ProductRightSide/addProduct.vue'),
               children: [
                 // 路径为'/goods/addProduct'，使用组件step0
@@ -132,6 +130,10 @@ export default new Router({
               path: '/goods/brandManagement',
               name: '品牌管理',
               component: () => import('./components/Product/ProductRightSide/brandManagement.vue')
+            }, {
+              path: '/goods/brandManagement/addNewBrand',
+              name: 'addNewBrand',
+              component: () => import('./components/Product/ProductRightSide/addNewBrand.vue')
             }, {
               path: '/goods/libraryManagement',
               name: '图片库管理',

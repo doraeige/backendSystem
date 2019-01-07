@@ -20,7 +20,7 @@
                             <el-option label="居家" value="居家"></el-option>
                             <el-option label="洗护" value="洗护"></el-option>
                         </el-select>
-                        <p class="select-text">不选择分类默认为顶级分类</p>
+                        <p class="el-upload__tip">不选择分类默认为顶级分类</p>
                     </el-form-item>
                     <el-form-item label="数量单位">
                         <el-col :span="9">
@@ -103,7 +103,7 @@
                     </el-form-item>
                         <el-form-item label="分类描述">
                         <el-col :span="16">
-                            <el-input type="textarea" v-model="form.desc"></el-input>
+                            <el-input type="textarea" v-model="form.desc" placeholder="请输入内容"></el-input>
                         </el-col>
                     </el-form-item>
                     <el-form-item>
@@ -197,6 +197,11 @@
         height: 8px;
         background-color: @color;
     }
+    .addClassification /deep/ .el-upload__tip {
+        margin-top: 0;
+        line-height: 20px;
+        color: #9FA0A0;
+    }
     .common {
         margin-top: 20px;
         padding-left: calc((100% - 924px) / 2);
@@ -211,10 +216,6 @@
             padding: 50px 0 10px 200px;
             .sub-headings {
                 width: 224px;
-            }
-            .select-text {
-                font-size: 12px;
-                color: #9FA0A0;
             }
             .el-button--primary {
                 border-color: @color;

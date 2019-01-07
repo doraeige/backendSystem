@@ -137,12 +137,12 @@
             </el-pagination>
             <div class="left-side">
                 <!-- :indeterminate="indeterminate" v-model="checkAll" @change="handleCheckAllChange" -->
-                    <el-checkbox :indeterminate="indeterminate" @change="handleCheckAllChange">全选</el-checkbox>
-                    <el-select v-model="itemId" placeholder="批量操作" class="select-input">
-                        <el-option v-for="item in options" :key="item.id" :label="item.label" :value="item.id"></el-option>
-                    </el-select>
-                    <el-button size="mini" @click="onSubmit(itemId)">确定</el-button>
-                </div>
+                <el-checkbox :indeterminate="indeterminate" @change="handleCheckAllChange">全选</el-checkbox>
+                <el-select v-model="itemId" placeholder="批量操作" class="select-input">
+                    <el-option v-for="item in options" :key="item.id" :label="item.label" :value="item.id"></el-option>
+                </el-select>
+                <el-button size="mini" @click="onSubmit(itemId)">确定</el-button>
+            </div>
         </el-row>
     </div>
 </template>
@@ -217,7 +217,7 @@
                 pageArr: [],
                 tableData: [],
                 currentPage: 1,
-                pagesize: 5,
+                pagesize: 10,
                 page: 1,
                 options: [
                     {
@@ -255,9 +255,17 @@
             }
         },
         methods: {
+            /**
+            * 按钮点击事件
+            * @param {boolean} isClick: 是否收起筛选
+            */
             handleClickStatu: function() {
                 this.isClick = !this.isClick
             },
+            /**
+            * 按钮点击事件
+            * @param {number} val: 选择的数据
+            */
             handleSelectionChange(val) {
                 this.multipleSelection = val
             },
@@ -454,6 +462,9 @@
                     margin-left: 10px;
                     margin-bottom: 2px;
                     width: 110px;
+                }
+                .select-input {
+                    width: 120px;
                 }
                 .el-button--mini {
                     margin-bottom: 7px;

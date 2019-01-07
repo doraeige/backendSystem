@@ -33,7 +33,7 @@
                             <el-radio label="关键字检索"></el-radio>
                             <el-radio label="范围检索"></el-radio>
                         </el-radio-group>
-                        <p class="tip">不需要该属性成为检索商品条件的情况请选择不需要检索，需要该属性进行关键字检索商品时选择关键字检索，如果该属性检索时希望是指定某个范围时，选择范围检索。</p>
+                        <p class="el-upload__tip">不需要该属性成为检索商品条件的情况请选择不需要检索，需要该属性进行关键字检索商品时选择关键字检索，如果该属性检索时希望是指定某个范围时，选择范围检索。</p>
                     </el-form-item>
                     <el-form-item label="相同属性值的商品是否关联">
                         <el-radio-group v-model="form.link">
@@ -47,7 +47,7 @@
                             <el-radio label="单选属性"></el-radio>
                             <el-radio label="复选属性"></el-radio>
                         </el-radio-group>
-                        <p class="tip">选择"单选/复选属性"时，可以对商品该属性设置多个值，同时还能对不同属性值指定不同的价格加价，用户购买商品时需要选定具体的属性值。选择"唯一属性"时，商品的该属性值只能设置一个值，用户只能查看该值。</p>
+                        <p class="el-upload__tip">选择"单选/复选属性"时，可以对商品该属性设置多个值，同时还能对不同属性值指定不同的价格加价，用户购买商品时需要选定具体的属性值。选择"唯一属性"时，商品的该属性值只能设置一个值，用户只能查看该值。</p>
                     </el-form-item>
                     <el-form-item label="该属性值的录入方式">
                         <el-radio-group v-model="form.way">
@@ -74,7 +74,7 @@
                             <el-input v-model="form.sort"></el-input>
                         </el-col>
                         <el-col :span="24">
-                            <p class="tip">排序级别最高的属性可单独上传属性图片</p>
+                            <p class="el-upload__tip">排序级别最高的属性可单独上传属性图片</p>
                         </el-col>
                     </el-form-item>
                     <el-form-item>
@@ -142,6 +142,11 @@
     .addAttributes /deep/ .el-checkbox__input.is-checked+.el-checkbox__label {
         color: @color;
     }
+    .addAttributes /deep/ .el-upload__tip {
+        margin-top: 0;
+        line-height: 20px;
+        color: #9FA0A0;
+    }
     .common {
         margin-top: 20px;
         padding-left: calc((100% - 924px) / 2);
@@ -163,10 +168,6 @@
                 &:hover {
                     background-color: rgba(91,192,191,0.9);
                 }
-            }
-            .tip {
-                font-size: 12px;
-                color: #9FA0A0;
             }
         }
     }
