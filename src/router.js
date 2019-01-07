@@ -53,10 +53,12 @@ export default new Router({
           path: '/commentDetail',
           name: 'commentDetail',
           component: () => import('./components/Product/commentDetail.vue')
-        }, {
+        },
+        {
           path: '/goods',
           name: '商品',
           component: () => import('./components/Product/ProductSideBar.vue'),
+          redirect: '/goods/productList',
           children: [
             {
               path: '/goods/productList',
@@ -142,6 +144,43 @@ export default new Router({
               path: '/goods/libraryManagement/newAlbum',
               name: 'newAlbum',
               component: () => import('./components/Product/ProductRightSide/newAlbum.vue')
+            }
+          ]
+        },
+        {
+          path: '/order',
+          name: '订单',
+          component: () => import('./components/Order/OrderSideBar.vue'),
+          redirect: '/order/orderList',
+          children: [
+            {
+              path: '/order/orderList',
+              name: '订单列表',
+              component: () => import('./components/Order/OrderRightSide/orderList.vue')
+            }, {
+              path: '/order/confirmGoods',
+              name: '确认收货',
+              component: () => import('./components/Order/OrderRightSide/confirmGoods.vue')
+            }, {
+              path: '/order/arrivalReminder',
+              name: '到货提醒',
+              component: () => import('./components/Order/OrderRightSide/arrivalReminder.vue')
+            }, {
+              path: '/order/orderSetting',
+              name: '订单设置',
+              component: () => import('./components/Order/OrderRightSide/orderSetting.vue')
+            }, {
+              path: '/order/returnApplicationProcessing',
+              name: '退货申请处理',
+              component: () => import('./components/Order/OrderRightSide/returnApplicationProcessing.vue')
+            }, {
+              path: '/order/refundRequestProcessing',
+              name: '退款申请处理',
+              component: () => import('./components/Order/OrderRightSide/refundRequestProcessing.vue')
+            }, {
+              path: '/order/returnReasonManagement',
+              name: '退货原因管理',
+              component: () => import('./components/Order/OrderRightSide/returnReasonManagement.vue')
             }
           ]
         }

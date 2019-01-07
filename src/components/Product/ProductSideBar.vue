@@ -68,12 +68,14 @@
 
 <style scoped lang="less">
     @import '../../assets/common.less';
-    .productSideBar .el-menu-item.is-active {
-        background-color: #fff !important;
-        border-bottom: 1px solid @color;
+    .productSideBar /deep/ .el-menu-item, .el-submenu__title {
+        height: 42px;
+        line-height: 42px;
+        font-size: 13px;
     }
     .productSideBar {
         width: 1280px;
+        height: 100vh;
         .flex;
         font-family: @font-family;
         box-sizing: border-box;
@@ -85,10 +87,14 @@
             border: 1px solid #ebeef5;
             .el-menu-item.is-disabled {
                 cursor: default;
-                color: #B9B9BA;
+                font-size: 15px;
+                font-weight: bold;
             }
             .el-menu-item.is-active { 
-                color: #5BC0BF;    
+                color: #5BC0BF; 
+                background-color: #fff !important;
+                border-bottom: 1px solid @color;
+                cursor: pointer;   
             }
         }
         .el-main {

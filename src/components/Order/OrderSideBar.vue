@@ -1,10 +1,10 @@
 <template>
-  <div class="homeSideBar">
+  <div class="orderSideBar">
     <el-aside width="188px">
         <el-col :span="24">
             <el-menu :default-active="this.$route.path"  text-color="#595757" background-color="rgba(239,239,239,1)" router @select="handleSelect">
                 <el-menu-item index="0" disabled>
-                    <span slot="title">系统首页</span>
+                    <span slot="title">订单管理</span>
                 </el-menu-item>
                 <div v-for="(item, index) in list" :key="index">
                     <el-menu-item :index="item.path" >
@@ -12,6 +12,15 @@
                         <span slot="title">{{item.title}}</span>
                     </el-menu-item>
                 </div>
+                <el-menu-item index="1" disabled>
+                        <span slot="title">退款及退货</span>
+                    </el-menu-item>
+                    <div v-for="(item, index) in listTwo">
+                        <el-menu-item :index="item.path">
+                            <i class="iconfont icon-dian"></i>
+                            <span slot="title">{{item.title}}</span>
+                        </el-menu-item>
+                    </div>
             </el-menu>
         </el-col>
     </el-aside>
@@ -23,22 +32,35 @@
 
 <script>
 export default {
-    name: 'homeSideBar',
+    name: 'orderSideBar',
     data() {
         return {
-            active: '/index/systemIndex',
-            list: [{
-                    path: '/index/systemIndex',
-                    title: '系统首页'
+            active: '/order/orderList',
+            list: [
+                {
+                    path: '/order/orderList',
+                    title: '订单列表'
                 },{
-                    path: '/index/accountSetting',
-                    title: '账户设置'
+                    path: '/order/confirmGoods',
+                    title: '确认收货'
                 },{
-                    path: '/index/systemInfo',
-                    title: '系统信息'
+                    path: '/order/arrivalReminder',
+                    title: '到货提醒'
                 },{
-                    path: '/index/loginLog',
-                    title: '登录日志'
+                    path: '/order/orderSetting',
+                    title: '订单设置'
+                }
+            ],
+            listTwo: [
+                {
+                    path: '/order/returnApplicationProcessing',
+                    title: '退货申请处理'
+                },{
+                    path: '/order/refundRequestProcessing',
+                    title: '退款申请处理'
+                },{
+                    path: '/order/returnReasonManagement',
+                    title: '退货原因管理'
                 }
             ]
         }
@@ -53,12 +75,12 @@ export default {
 
 <style scoped lang="less">
     @import '../../assets/common.less';
-    .homeSideBar /deep/ .el-menu-item, .el-submenu__title {
+    .orderSideBar /deep/ .el-menu-item, .el-submenu__title {
         height: 42px;
         line-height: 42px;
         font-size: 13px;
     }
-    .homeSideBar {
+    .orderSideBar {
         width: 1280px;
         height: 100vh;
         .flex;
