@@ -53,6 +53,10 @@ export default {
 
 <style scoped lang="less">
     @import '../../assets/common.less';
+    .homeSideBar .el-menu-item.is-active {
+        background-color: #fff !important;
+        border-bottom: 1px solid @color;
+    }
     .homeSideBar {
         width: 1280px;
         height: 100vh;

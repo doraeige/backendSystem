@@ -68,6 +68,10 @@
 
 <style scoped lang="less">
     @import '../../assets/common.less';
+    .productSideBar .el-menu-item.is-active {
+        background-color: #fff !important;
+        border-bottom: 1px solid @color;
+    }
     .productSideBar {
         width: 1280px;
         .flex;

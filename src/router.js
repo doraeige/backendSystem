@@ -130,7 +130,7 @@ export default new Router({
               path: '/goods/brandManagement',
               name: '品牌管理',
               component: () => import('./components/Product/ProductRightSide/brandManagement.vue')
-            }, {
+            }, { // 新增品牌
               path: '/goods/brandManagement/addNewBrand',
               name: 'addNewBrand',
               component: () => import('./components/Product/ProductRightSide/addNewBrand.vue')
@@ -138,6 +138,10 @@ export default new Router({
               path: '/goods/libraryManagement',
               name: '图片库管理',
               component: () => import('./components/Product/ProductRightSide/libraryManagement.vue')
+            }, { // 新建相册
+              path: '/goods/libraryManagement/newAlbum',
+              name: 'newAlbum',
+              component: () => import('./components/Product/ProductRightSide/newAlbum.vue')
             }
           ]
         }

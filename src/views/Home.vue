@@ -97,7 +97,7 @@ export default {
     }
     .home /deep/ .el-menu-item.is-active {
         border: 0;
-        background-color: rgba(255,255,255,0.5) !important;
+        background-color: rgba(255,255,255,0.4) !important;
     }
     .home /deep/ .el-badge__content {
         width: 15px;

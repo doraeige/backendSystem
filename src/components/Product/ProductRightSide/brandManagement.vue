@@ -168,13 +168,11 @@
             },
             /**
             * 确定 按钮点击事件
-            * @param {number} status: 1 显示品牌 2 隐藏品牌
+            * @param {number} status: 1 显示品牌 2 隐藏品牌 3 导航栏显示 4 导航栏隐藏
             * @param {array} multipleSelection 选中的数据
             * this.$set(item, value, boolean) Vue 数组更新检测 响应表格数据
             */
             onSubmit(status) {
-                console.log(status)
-                console.log(this.multipleSelection)
                 let action = this.actions[status]
                 let value = action[0]
                 let boolean = action[1]
@@ -183,7 +181,6 @@
         },
         mounted() {
             this.axios.get('/brandlist').then(res => {
-                // console.log(res.data)
                 if(res.data.error_code == 0){
                     this.tableData = res.data.data.tableData
                 }
